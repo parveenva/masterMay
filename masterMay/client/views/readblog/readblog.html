@@ -1,0 +1,44 @@
+<template name="Readblog">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+						{{> ReadblogReadblogComponent}}
+
+			</div>
+		</div>
+	</div>
+
+{{> HomePublicPublicFooter}}
+</template>
+
+<template name="ReadblogReadblogComponent">
+	 
+	 <div  >
+	
+			<div class="form-group  field-title">
+				<h2>
+					{{essay.title}}
+				</h2>
+				<div class="input-div">
+					<p class="form-control-static  control-field-title">
+						
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-content">
+				
+				<div class="input-div">
+					<p class="form-control-static  control-field-content">
+						{{{essay.Content}}}
+					</p>
+				</div>
+			</div>
+				
+	</div>
+		 
+				
+
+		 
+	 
+</template>
+
