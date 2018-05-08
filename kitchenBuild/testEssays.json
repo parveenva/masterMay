@@ -1311,6 +1311,7 @@
 			],
 			"default_route": "home_dash"
 		},
+		"send_verification_email": true,
 		"login_with_google": true,
 		"login_with_facebook": true,
 		"login_with_twitter": true,
