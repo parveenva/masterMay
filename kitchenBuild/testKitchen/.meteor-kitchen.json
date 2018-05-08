@@ -14,7 +14,7 @@
 		},
 		{
 			"path": "server/server.js",
-			"checksum": "ddefb1c026d21f404233d030dee79d94c43b9a20"
+			"checksum": "0f0b76f029b324983d0d6550a185484ad491b84c"
 		},
 		{
 			"path": "client/views/not_found/not_found.html",
