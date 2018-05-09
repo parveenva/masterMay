@@ -53,3 +53,13 @@ UsersCollegeInfo.after.update(function(userId, doc, fieldNames, modifier, option
 UsersCollegeInfo.after.remove(function(userId, doc) {
 	
 });
+
+
+People.allow({
+  insert: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  }
+});

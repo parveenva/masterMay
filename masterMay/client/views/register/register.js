@@ -30,6 +30,7 @@ Template.Register.events({
 		var register_name = t.find('#register_name').value.trim();
 		var register_email = t.find('#register_email').value.trim();
 		var register_password = t.find('#register_password').value;
+		var register_password_copy = t.find('#register_password_copy').value;
 
 		// check name
 		if(register_name == "")
@@ -53,6 +54,14 @@ Template.Register.events({
 		{
 			pageSession.set("errorMessage", "Your password must be at least " + min_password_len + " characters long.");
 			t.find('#register_password').focus();
+			return false;
+		}
+
+		if(!isValidPassword(register_password_copy, min_password_len) || register_password_copy != register_password)
+		{
+			//pageSession.set("errorMessage", "Your password must be at least " + min_password_len + " characters long.");
+			pageSession.set("errorMessage", "Passwords do not match.");
+			t.find('#register_password_copy').focus();
 			return false;
 		}
 

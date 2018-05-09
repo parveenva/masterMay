@@ -1,6 +1,15 @@
-var verifyEmail = false;
+var verifyEmail = true;
 
 Accounts.config({ sendVerificationEmail: verifyEmail });
+
+Accounts.emailTemplates.verifyEmail.subject = function(user, url) {
+    return 'Open College Essays - confirm your email address.' ;
+};
+
+Accounts.emailTemplates.verifyEmail.from = function(user, url) {
+    return 'Open College Essays <no-reply@example.com>' ;
+};
+
 
 Meteor.startup(function() {
 	// read environment variables from Meteor.settings
@@ -9,8 +18,7 @@ Meteor.startup(function() {
 			process.env[variableName] = Meteor.settings.env[variableName];
 		}
 	}
-
-	//
+  process.env.MAIL_URL="smtp://xgendemo:R1tew0rk@gm@smtp.gmail.com:587/";	//
 	// Setup OAuth login service configuration (read from Meteor.settings)
 	//
 	// Your settings file should look like this:
