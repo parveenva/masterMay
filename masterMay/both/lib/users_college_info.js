@@ -38,3 +38,30 @@ People.allow({
     return true;
   }
 });
+
+
+  Essays = new Mongo.Collection("Essays");
+
+Essays.userCanInsert = function(userId, doc) {
+  return true;
+};
+
+Essays.userCanUpdate = function(userId, doc) {
+  return true;
+};
+
+Essays.userCanRemove = function(userId, doc) {
+  return true;
+};
+
+Essays.allow({
+  update: function(userId, doc){
+    return true;
+  }
+});
+
+Essays.allow({
+  insert: function(){
+    return true;
+  }
+});

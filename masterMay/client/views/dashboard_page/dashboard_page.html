@@ -15,8 +15,13 @@
 		<div class="row" id="title_row">
 			<div class="col-md-12">
 
-				  {{#autoForm id="afInsertDemo" type="insert" collection="People"}}
-  <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
+				  {{#autoForm id="afInsertDemo"  schema="CombinedForm"  }}
+
+				   {{#each afFieldNames}}
+    {{> afQuickField name=this.name options=afOptionsFromSchema}}
+  {{/each}}
+
+  <!-- <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='firstName'}}</label>
     {{> afFieldInput name='firstName'}}
     {{#if afFieldIsInvalid name='firstName'}}
@@ -36,9 +41,9 @@
     {{#if afFieldIsInvalid name='age'}}
     <span class="help-block">{{{afFieldMessage name='age'}}}</span>
     {{/if}}
-  </div>
+  </div> -->
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">Add Person</button>
+    <button type="submit"   class="btn btn-primary">Add Person</button>
     <button type="reset" class="btn btn-default">Reset Form</button>
   </div>
 {{/autoForm}}

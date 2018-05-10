@@ -10,6 +10,7 @@ Router.publicRoutes = [
 	"login",
 	"register",
 	"forgot_password",
+
 	"reset_password"
 ];
 
@@ -42,13 +43,14 @@ Router.privateRoutes = [
 	"colleges.details",
 	"colleges.insert",
 	"colleges.update",
-	"dashboard_page",
+	
 	"home_dash"
 ];
 
 Router.freeRoutes = [
 	"home_public",
 	"fbtest",
+	"dashboard_page",
 	"readblog"
 ];
 

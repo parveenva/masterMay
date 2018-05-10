@@ -24,4 +24,8 @@ Meteor.methods({
 
 		UsersCollegeInfo.remove({ _id: id });
 	}
+
+
+
+        
 });
