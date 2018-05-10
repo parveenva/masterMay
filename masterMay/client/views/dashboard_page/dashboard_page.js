@@ -13,11 +13,11 @@ Schemas.Person = new SimpleSchema({
   lastName: {
     type: String 
   },
-  age: {
-    type: Number 
-  },
+  
   Email: {
-    type: String
+    type: String,
+    
+ regEx: SimpleSchema.RegEx.Email
    
    },
 
@@ -25,11 +25,16 @@ Schemas.Person = new SimpleSchema({
 
 
 Schemas.essayInformation = new SimpleSchema({
-  title:{
+   EssayPrompt:{
     type: String 
   },
-  Content: {
-    type: String 
+  CommonAppSchool: {
+    type: String, 
+     label: "Common App/School"
+  },
+  Essay: {
+    type: String,
+   
  
   }
 }, { tracker: Tracker });
