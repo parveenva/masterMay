@@ -11,7 +11,8 @@ Router.publicRoutes = [
 	"register",
 	"forgot_password",
 
-	"reset_password"
+	"reset_password",
+	"more_essay"
 ];
 
 Router.privateRoutes = [
@@ -148,7 +149,10 @@ else {
 	this.route("/colleges/update/:collegeId", {name: "colleges.update", title: "", controller: "CollegesUpdateController"});
 	this.route("/dashboard_page", {name: "dashboard_page", title: "", controller: "DashboardPageController"});
 	this.route("/home_dash", {name: "home_dash", title: "", controller: "HomeDashController"});
-
+      this.route('addmore', {
+        path: '/addmore',
+        template: 'addmore'
+    }); 	
 	this.route('/verify_email/:token', {
 		name: "verify_email",
         controller: 'VerifyEmailController',

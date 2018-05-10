@@ -15,7 +15,12 @@ Schemas.Person = new SimpleSchema({
   },
   age: {
     type: Number 
-  }
+  },
+  Email: {
+    type: String
+   
+   },
+
 }, { tracker: Tracker });
 
 
@@ -98,7 +103,7 @@ People.insert(docA, function(err, id) {
  
           }
         });
-     Router.go("nextStep", {});
+     Router.go("/addmore", {});
 
         return true;
     },
