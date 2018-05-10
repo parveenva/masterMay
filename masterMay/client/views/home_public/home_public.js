@@ -15,10 +15,16 @@ Template.HomePublic.onRendered(function() {
 });
 
 Template.HomePublic.events({
-	
+
+			
 });
 
-Template.HomePublic.helpers({
+Template.HomePublicJumbotronJumbotronContent.helpers({
+
+	"nextURL": function() {
+		 if(Meteor.user()){ return "/home_dash";}  
+		  return "/dashboard_page";
+	},
 	
 });
 

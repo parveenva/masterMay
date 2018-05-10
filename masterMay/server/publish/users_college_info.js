@@ -2,6 +2,10 @@ Meteor.publish("college_list", function() {
 	return UsersCollegeInfo.find({}, {});
 });
 
+Meteor.publish("people_list", function() {
+	return People.find({}, {});
+});
+
 Meteor.publish("colleges_null", function() {
 	return UsersCollegeInfo.find({_id:null}, {});
 });

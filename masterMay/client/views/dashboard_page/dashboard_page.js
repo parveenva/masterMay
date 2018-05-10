@@ -34,8 +34,31 @@ Schemas.essayInformation = new SimpleSchema({
   }
 }, { tracker: Tracker });
 
+Schemas.essayInformation1 = new SimpleSchema({
+  title:{
+    type: String 
+  },
+  Content: {
+    type: String 
+ 
+  },
+  userType: {
+    type: String 
+ 
+  },
+  peopleID: {
+    type: String 
+ 
+  },
+  createdBy: {
+    type: String,
+    optional : true 
+ 
+  }
+}, { tracker: Tracker });
 
-Essays.attachSchema(Schemas.essayInformation);
+
+Essays.attachSchema(Schemas.essayInformation1);
 
 
  
@@ -86,7 +109,16 @@ for (var key in Schemas.Person.schema()) {
  
                
             }
-  Essays.insert(docB, function(err, id) {
+var peopleID =  People.insert(docA, function(err, id) {
+          if (err) {
+           alert(err);
+          } else {
+ 
+          }
+        });
+alert("peopleID---"+peopleID);
+            var extend =  _.extend(docB, {"userType":"people","peopleID":peopleID});
+  Essays.insert(extend, function(err, id) {
           if (err) {
                       alert(err);
 
@@ -96,13 +128,7 @@ for (var key in Schemas.Person.schema()) {
         });
         
  
-People.insert(docA, function(err, id) {
-          if (err) {
-           alert(err);
-          } else {
- 
-          }
-        });
+
      Router.go("/addmore", {});
 
         return true;
