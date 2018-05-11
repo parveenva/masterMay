@@ -66,10 +66,10 @@ Template.Register.events({
 
 		submit_button.button("loading");
 		var n = register_name.split(" ");
-		alert("n---"+n);
-		alert("n---"+n[0]);
-		alert("n---"+n[1]);
- 		Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name },firstName:n[0],lastName:n[1]}, function(err) {
+		//alert("n---"+n);
+		//alert("n---"+n[0]);
+		//alert("n---"+n[1]);
+ 		Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name }}, function(err) {
 			submit_button.button("reset");
 			if(err) {
 				if(err.error === 499) {

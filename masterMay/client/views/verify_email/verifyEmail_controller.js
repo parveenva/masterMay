@@ -25,7 +25,7 @@ this.VerifyEmailController = RouteController.extend({
 			if(userID){
 
 			var email = Meteor.user().emails[0].address;
-			alert("email---"+email);
+			//alert("email---"+email);
 
 
 
@@ -33,18 +33,18 @@ this.VerifyEmailController = RouteController.extend({
 
    var  peopleID = People.findOne({"Email":email},{ fields: { "_id": 1 }});
 
-			alert("peopleID---"+peopleID._id);
+			//alert("peopleID---"+peopleID._id);
 
 
 			   var  essayID = Essays.findOne({"peopleID":peopleID._id},{ fields: { "_id": 1 }});
 		
-			alert("essayID---"+essayID._id);
+			//alert("essayID---"+essayID._id);
 
 			Essays.update({"_id":essayID._id},{$set:{"createdBy":userID}},function(error, result){
             if(error){
               alert(error);
             }else{
-                              alert("done");
+                             // alert("done");
             
             }
           });
