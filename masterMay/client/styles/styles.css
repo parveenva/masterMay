@@ -318,3 +318,8 @@ i {
     font: normal normal normal normal 21px / 33.18px medium-content-serif-font, Georgia, Cambria, "Times New Roman", Times, serif;
     outline: rgba(0, 0, 0, 0.843137) none 0px;
 }/*#A_2, #A_3*/
+
+.btn-wrap-text {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }

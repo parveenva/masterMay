@@ -19,7 +19,7 @@ Template.verifyEmail.onRendered(function() {
 
 });
 
-Template.verified.onRendered(function() {
+Template.verified.onDestroyed(function() {
 		//alert("verified--"+Meteor.userId());
 
 		var userID =  Meteor.userId();

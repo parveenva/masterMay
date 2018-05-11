@@ -49,7 +49,7 @@ Schemas.essayInformation = new SimpleSchema({
   Content: {
     type: String,
 
-    label: 'Content',
+    label: 'Essay',
     autoform: {
          type: 'textarea',
           id: 'Content'
