@@ -11,14 +11,12 @@ Router.publicRoutes = [
 	"register",
 	"forgot_password",
 
-	"reset_password",
-	"more_essay"
+	"reset_password"
 ];
 
 Router.privateRoutes = [
 	"essays",
 	"essays.details",
-	"essays.insert",
 	"essays.update",
 	"customers",
 	"customers.insert",
@@ -52,7 +50,10 @@ Router.freeRoutes = [
 	"home_public",
 	"fbtest",
 	"dashboard_page",
-	"readblog"
+	"readblog",
+	"more_essay",
+		"essays.insert"
+
 ];
 
 Router.roleMap = [

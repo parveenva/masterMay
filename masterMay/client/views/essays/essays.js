@@ -1,6 +1,7 @@
 var pageSession = new ReactiveDict();
 
 Meteor.subscribe("allUsers");
+Meteor.subscribe("people_list");
 
 
 Template.Essays.onCreated(function() {
@@ -364,7 +365,11 @@ Template.EssaysViewTableItems.helpers({
 	},
 	createdByUserDetails: function () {
 		
-
+		if(this.createdBy){
         return Users.findOne({_id: this.createdBy});
+    	}else{
+        return People.findOne({_id: this.peopleID});
+
+    	}
     }
 });

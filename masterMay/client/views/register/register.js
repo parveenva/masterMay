@@ -14,7 +14,6 @@ Template.Register.onRendered(function() {
 	pageSession.set("verificationEmailSent", false);
 
 	
-
 	Meteor.defer(function() {
 		globalOnRendered();
 		$("input[autofocus]").focus();
@@ -66,7 +65,11 @@ Template.Register.events({
 		}
 
 		submit_button.button("loading");
-		Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name }}, function(err) {
+		var n = register_name.split(" ");
+		alert("n---"+n);
+		alert("n---"+n[0]);
+		alert("n---"+n[1]);
+ 		Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name },firstName:n[0],lastName:n[1]}, function(err) {
 			submit_button.button("reset");
 			if(err) {
 				if(err.error === 499) {
@@ -96,6 +99,26 @@ Template.Register.helpers({
 	},
 	verificationEmailSent: function() {
 		return pageSession.get("verificationEmailSent");
+	},fullName: function() {
+		if(Session.get("peopleFirstName")){return Session.get("peopleFirstName")+" "+Session.get("peopleLastName");}
+		return "";
 	}
 	
 });
+
+Template.RegisterAfter.helpers({
+	errorMessage: function() {
+		return pageSession.get("errorMessage");
+	},
+	
+	fullName: function() {
+		if(Session.get("peopleFirstName")){return Session.get("peopleFirstName")+" "+Session.get("peopleLastName");}
+		return "";
+	},
+	email: function() {
+				if(Session.get("peopleEmail")){return Session.get("peopleEmail");}
+		return "";
+	}
+	
+});
+

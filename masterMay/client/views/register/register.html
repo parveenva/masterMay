@@ -2,17 +2,37 @@
 	<div class="container">
 		{{#if verificationEmailSent}}
 		<div class="account-form">
+					{{#if fullName}}
+
+					<h2>
+Thank you for submitting and making the college application process easy for generations to come!!			</h2>
+			<p>
+				You should be receiving an email from us shortly to confirm and activate your essay submission. Our team will then review your essays and once approved for publishing, a gift card will be sent to your email address!
+			</p>
+
+							{{else}}
+
+
 			<h2>
 				Thanks for signing up!
 			</h2>
 			<p>
 				We've sent verification link to your e-mail address.
 			</p>
+						{{/if}}
+
 			<br />			<button class="btn btn-lg btn-primary btn-block go-home" type="button" data-loading-text="Please wait...">
 				OK
 			</button>
 		</div>
 		{{else}}
+
+		{{#if fullName}}
+		{{> RegisterAfter}}
+
+		{{else}}
+
+		
 		<form id="register_form" class="account-form" role="form">
 			<h2>
 				Please sign up
@@ -22,8 +42,8 @@
 				{{errorMessage}}
 			</div>
 			{{/if}}
-			<input id="register_name" type="text" class="form-control" placeholder="Your full name" required autofocus>
-			<input id="register_email" type="text" class="form-control" placeholder="Email address" required>
+			<input id="register_name" type="text" class="form-control" placeholder="Your name" required autofocus>
+			<input id="register_email" type="text" class="form-control" placeholder="Your email" required>
 			<input id="register_password" type="password" class="form-control" placeholder="Password" required>
 			<input id="register_password_copy" type="password" class="form-control" placeholder="Confirm Password" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">
@@ -37,6 +57,49 @@
 			</p>
 		</form>
 		{{/if}}
+			{{/if}}
+
 	</div>
+</template>
+
+
+<template name="RegisterAfter">
+	<div class="container">
+		
+
+		
+
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<h2 id="component-title" align="center" >
+We need a few more quick things to send you the gift card:        </h2>
+			</div>
+		</div>
+
+	
+
+ 
+		<form id="register_form" class="account-form" role="form">
+			<h2 class="text-muted">
+Please confirm your email:			</h2>
+
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+			<input id="register_name" type="text" class="form-control" value={{fullName}} required autofocus>
+			<input id="register_email" type="text" class="form-control" value={{email}} required>
+			<h2 class="text-muted">
+Would you like to create a sign in? (If yes, enter and confirm password)
+</h2>
+			<input id="register_password" type="password" class="form-control" placeholder="Password" required>
+			<input id="register_password_copy" type="password" class="form-control" placeholder="Confirm Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">
+				Submit
+			</button>
+			
+		</form>
+ 	</div>
 </template>
 

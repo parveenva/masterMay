@@ -7,7 +7,7 @@ Template.HomePublic.onDestroyed(function() {
 });
 
 Template.HomePublic.onRendered(function() {
-	$('section, .jumbotron').css('min-height', $(window).height()/2 + 'px'); window.scrollTo(0, 0);
+	$('section, .jumbotron').css('min-height', $(window).height()/3 + 'px'); window.scrollTo(0, 0);
 	Meteor.defer(function() {
 		globalOnRendered();
 		$("input[autofocus]").focus();

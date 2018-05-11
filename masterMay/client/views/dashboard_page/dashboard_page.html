@@ -1,19 +1,21 @@
 <template name="DashboardPage">
 
-	<div class="row" id="title_row">
-			<div class="col-md-12">
-			</div>
-		</div>
+
 <!-- {{wizardId}}
  -->
 
-   <h2 id="component-title">
-            
-        </h2>
+   
 
 	<div class="page-container container"  >
 		<div class="row" id="title_row">
 			<div class="col-md-12">
+				<h2 id="component-title">
+            Submit your college essays and get a free $50 gift card
+        </h2>
+			</div>
+		</div>
+		<div class="row" id="title_row">
+			<div >
 
 				  {{#autoForm id="afInsertDemo"  schema="CombinedForm"  }}
 
@@ -21,21 +23,21 @@
     {{> afQuickField name=this.name options=afOptionsFromSchema}}
   {{/each}} -->
 
-  <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
+  <div class="  col-md-6 form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='firstName'}}</label>
     {{> afFieldInput name='firstName'}}
     {{#if afFieldIsInvalid name='firstName'}}
     <span class="help-block">{{{afFieldMessage name='firstName'}}}</span>
     {{/if}}
   </div>
-   <div class="form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
+   <div class=" col-md-6  form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='lastName'}}</label>
     {{> afFieldInput name='lastName'}}
     {{#if afFieldIsInvalid name='lastName'}}
     <span class="help-block">{{{afFieldMessage name='lastName'}}}</span>
     {{/if}}
   </div>
-  <div class="form-group {{#if afFieldIsInvalid name='Email'}}has-error{{/if}}">
+  <div class=" col-md-7  form-group {{#if afFieldIsInvalid name='Email'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='Email'}}</label>
     {{> afFieldInput name='Email'}}
     {{#if afFieldIsInvalid name='Email'}}
@@ -44,35 +46,35 @@
   </div>
 
 
- <div class="form-group {{#if afFieldIsInvalid name='EssayPrompt'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='EssayPrompt'}}</label>
-    {{> afFieldInput name='EssayPrompt'}}
-    {{#if afFieldIsInvalid name='EssayPrompt'}}
-    <span class="help-block">{{{afFieldMessage name='EssayPrompt'}}}</span>
+ <div class="col-md-7  form-group {{#if afFieldIsInvalid name='title'}}has-error{{/if}}">
+    <label class="control-label">{{afFieldLabelText name='title'}}</label>
+    {{> afFieldInput name='title'}}
+    {{#if afFieldIsInvalid name='title'}}
+    <span class="help-block">{{{afFieldMessage name='title'}}}</span>
     {{/if}}
   </div>
 
 
 
- <div class="form-group {{#if afFieldIsInvalid name='CommonAppSchool'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='CommonAppSchool'}}</label>
-    {{> afFieldInput name='CommonAppSchool'}}
-    {{#if afFieldIsInvalid name='CommonAppSchool'}}
-    <span class="help-block">{{{afFieldMessage name='CommonAppSchool'}}}</span>
+ <div class="col-md-7  form-group {{#if afFieldIsInvalid name='commonAppSchool'}}has-error{{/if}}">
+    <label class="control-label">{{afFieldLabelText name='commonAppSchool'}}</label>
+    {{> afFieldInput name='commonAppSchool'}}
+    {{#if afFieldIsInvalid name='commonAppSchool'}}
+    <span class="help-block">{{{afFieldMessage name='commonAppSchool'}}}</span>
     {{/if}}
   </div>
 
 
- <div class="form-group {{#if afFieldIsInvalid name='Essay'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='Essay'}}</label>
-    {{> afFieldInput name='Essay'}}
-    {{#if afFieldIsInvalid name='Essay'}}
-    <span class="help-block">{{{afFieldMessage name='Essay'}}}</span>
+ <div class="col-md-12  form-group {{#if afFieldIsInvalid name='Content'}}has-error{{/if}}">
+    <label class="control-label">{{afFieldLabelText name='Content'}}</label>
+    {{> afFieldInput name='Content'}}
+    {{#if afFieldIsInvalid name='Content'}}
+    <span class="help-block">{{{afFieldMessage name='Content'}}}</span>
     {{/if}}
   </div>
-  <div class="form-group">
-    <button type="submit"   class="btn btn-primary">Add Person</button>
-    <button type="reset" class="btn btn-default">Reset Form</button>
+  <div class=" col-md-12 form-group">
+    <button type="submit"   class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-default">Reset</button>
   </div>
 {{/autoForm}}
 
@@ -135,23 +137,19 @@
 
    
 		 
-		<div class="account-form">
-			<h2>
-				Would yo like to submit more Essay!!!
+ 			<h2>
+				Thank you for the submission.  
 			</h2>
-		</div>
-		<div> 
-		<a href="" class="btn btn-lg btn-warning animate a-pulse a-infinite"> Add more Essay
+ 		<div> 
+		<a href="/essays/insert" class="btn btn-primary"> Submit another Essay.
+		</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="register" class="btn btn-primary"> Done.
 		</a>
 		</div>
 
-		<div> 
-		<a href="register" class="btn btn-lg btn-warning animate a-pulse a-infinite"> Sign up
-		</a>
-		</div>
-
-
+		 
 </div>
 </div>
 </div>
 </template>
+
+

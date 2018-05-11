@@ -16,12 +16,12 @@ Meteor.publish("college", function(collegeId) {
 
 Meteor.publish('userData', function() {
    
-  return Meteor.users.find(this.userId, {fields: {
-    schoolNames: 1, firstName: 1, lastName: 1, email: 1,phone: 1, whySchool: 1,hearAboutUs:1
-  }});
-})
+  return Meteor.users.find(this.userId, {
+   // schoolNames: 1, firstName: 1, lastName: 1, email: 1,phone: 1, whySchool: 1,hearAboutUs:1
+  });
+});
 
 Meteor.publish('allUsers', function() {
-   return Meteor.users.find({}, {fields:{username:1,emails:1,firstName: 1, lastName: 1, email: 1,phone: 1}})
+   return Meteor.users.find({}, {fields:{profile:1,username:1,emails:1,firstName: 1, lastName: 1, email: 1,phone: 1}})
  })
 

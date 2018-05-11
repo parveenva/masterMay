@@ -91,9 +91,19 @@
 			{{{approval}}}
 		</td>
 		<td>
+			{{#if createdBy}}
 			{{#with createdByUserDetails}}
-                {{firstName}} {{lastName}}
+                 &nbsp;{{profile.name }}                
+
             {{/with}}
+
+            {{else}}
+            	{{#with createdByUserDetails}}
+                                {{firstName }} &nbsp; {{lastName }}*
+
+            {{/with}}
+
+            {{/if}}
 		
 		</td>
 		<td class="td-icon">

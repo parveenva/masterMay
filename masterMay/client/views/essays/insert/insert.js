@@ -97,8 +97,13 @@ Template.EssaysInsertForm.events({
 					}; break;
 				}
 			}
-
+ if(Meteor.user()){
 			Router.go("home_dash", mergeObjects(Router.currentRouteParams(), {}));
+		}
+		else{
+						Router.go("addmore", mergeObjects(Router.currentRouteParams(), {}));
+
+		}
 		}
 
 		function errorAction(msg) {
@@ -116,8 +121,12 @@ Template.EssaysInsertForm.events({
 
 			},
 			function(values) {
+				if( !(Meteor.user()) && Session.get("peopleID")){
+					alert("only from out");
+					 values.peopleID =Session.get("peopleID");
+					 alert( values.peopleID);
+				}
 				
-
 				Meteor.call("essaysInsert", values, function(e, r) { if(e) errorAction(e); else submitAction(r); });
 			}
 		);
