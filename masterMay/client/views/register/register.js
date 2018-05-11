@@ -69,7 +69,7 @@ Template.Register.events({
 		//alert("n---"+n);
 		//alert("n---"+n[0]);
 		//alert("n---"+n[1]);
- 		Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name }}, function(err) {
+ 		var userId = Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name }}, function(err) {
 			submit_button.button("reset");
 			if(err) {
 				if(err.error === 499) {
@@ -82,8 +82,23 @@ Template.Register.events({
 			{
 				pageSession.set("errorMessage", "");
 				pageSession.set("verificationEmailSent", true);
+
+
+
+
+
+
+
+
+
+
+
 			}
+
+
 		});
+					//alert("userId" +userId);
+
 		return false;
 	},
 

@@ -122,9 +122,9 @@ Template.EssaysInsertForm.events({
 			},
 			function(values) {
 				if( !(Meteor.user()) && Session.get("peopleID")){
-					alert("only from out");
+					//alert("only from out");
 					 values.peopleID =Session.get("peopleID");
-					 alert( values.peopleID);
+					// alert( values.peopleID);
 				}
 				
 				Meteor.call("essaysInsert", values, function(e, r) { if(e) errorAction(e); else submitAction(r); });

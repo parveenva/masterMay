@@ -16,42 +16,14 @@ this.VerifyEmailController = RouteController.extend({
 	},
 
 	isReady: function() {
-		Meteor.subscribe("people_list");
-		Meteor.subscribe("essay_list");
+		
 
 		var acc = Accounts.verifyEmail(this.params.token, function () {
 	
-			var userID =  Meteor.userId();
-			if(userID){
-
-			var email = Meteor.user().emails[0].address;
-			//alert("email---"+email);
-
-
-
- 
-
-   var  peopleID = People.findOne({"Email":email},{ fields: { "_id": 1 }});
-
-			//alert("peopleID---"+peopleID._id);
-
-
-			   var  essayID = Essays.findOne({"peopleID":peopleID._id},{ fields: { "_id": 1 }});
-		
-			//alert("essayID---"+essayID._id);
-
-			Essays.update({"_id":essayID._id},{$set:{"createdBy":userID}},function(error, result){
-            if(error){
-              alert(error);
-            }else{
-                             // alert("done");
-            
-            }
-          });
-
+			
 
 			            Router.go('/verified');
-			}
+			
         });
 
 		var subs = [
