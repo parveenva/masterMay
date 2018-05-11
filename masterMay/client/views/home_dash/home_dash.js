@@ -238,6 +238,31 @@ Template.HomeDashHomeDashDv.events({
 
 Template.HomeDashHomeDashDv.helpers({
 
+	"essayCount": function() {
+		//alert("essay_list.-------"+Essays);
+		//alert("essay_list.count()-------"+Essays.find().count());
+		  return Essays.find({"createdBy": { $in: [ "",  Meteor.userId()] }}).count();
+	},
+	 "approvedEssayCount": function() {
+		//alert("essay_list.-------"+Essays);
+		//alert("essay_list.count()-------"+Essays.find().count());
+		  // return Essays.find(    {"approval": { $in: [ "", "Approved" ] }}    ).count();
+	
+           return Essays.find( { $and: [  {"approval": { $in: [ "", "Approved" ] }} , {"createdBy": { $in: [ "",  Meteor.userId()] }} ] } ).count();
+
+
+	},
+
+
+
+
+	"pendingEssayCount": function() {
+		//alert("essay_list.-------"+Essays);
+		//alert("essay_list.count()-------"+Essays.find().count());
+		  // return Essays.find({"approval": { $in: [ "", "Pending" ] }}).count();
+ return Essays.find( { $and: [  {"approval": { $in: [ "", "Pending" ] }} , {"createdBy": { $in: [ "",  Meteor.userId()] }} ] } ).count();
+
+	},
 	"insertButtonClass": function() {
 		return Essays.userCanInsert(Meteor.userId(), {}) ? "" : "hidden";
 	},
