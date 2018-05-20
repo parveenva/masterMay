@@ -136,10 +136,15 @@ Template.EssaysInsertForm.events({
 	"click #form-cancel-button": function(e, t) {
 		e.preventDefault();
 
-		
+	 if(Meteor.user()){
+			Router.go("home_dash", mergeObjects(Router.currentRouteParams(), {}));
+		}
+		else{
+						Router.go("addmore", mergeObjects(Router.currentRouteParams(), {}));
 
-		Router.go("home_dash", mergeObjects(Router.currentRouteParams(), {}));
-	},
+		}
+		}
+	,
 	"click #form-close-button": function(e, t) {
 		e.preventDefault();
 

@@ -1,18 +1,17 @@
 var pageSession = new ReactiveDict();
-
-Meteor.subscribe("allUsers");
 Meteor.subscribe("people_list");
+Meteor.subscribe("essay_list");
 
 
-Template.Essays.onCreated(function() {
+Template.NotVerified.onCreated(function() {
 	
 });
 
-Template.Essays.onDestroyed(function() {
+Template.NotVerified.onDestroyed(function() {
 	
 });
 
-Template.Essays.onRendered(function() {
+Template.NotVerified.onRendered(function() {
 	
 	Meteor.defer(function() {
 		globalOnRendered();
@@ -20,22 +19,22 @@ Template.Essays.onRendered(function() {
 	});
 });
 
-Template.Essays.events({
+Template.NotVerified.events({
 	
 });
 
-Template.Essays.helpers({
+Template.NotVerified.helpers({
 	
 });
 
-var EssaysViewItems = function(cursor) {
+var NotVerifiedViewItems = function(cursor) {
 	if(!cursor) {
 		return [];
 	}
 
-	var searchString = pageSession.get("EssaysViewSearchString");
-	var sortBy = pageSession.get("EssaysViewSortBy");
-	var sortAscending = pageSession.get("EssaysViewSortAscending");
+	var searchString = pageSession.get("NotVerifiedViewSearchString");
+	var sortBy = pageSession.get("NotVerifiedViewSortBy");
+	var sortAscending = pageSession.get("NotVerifiedViewSortAscending");
 	if(typeof(sortAscending) == "undefined") sortAscending = true;
 
 	var raw = cursor.fetch();
@@ -47,7 +46,7 @@ var EssaysViewItems = function(cursor) {
 	} else {
 		searchString = searchString.replace(".", "\\.");
 		var regEx = new RegExp(searchString, "i");
-		var searchFields = ["title", "Content", "document", "approval"];
+		var searchFields = ["firstName", "lastName", "email"];
 		filtered = _.filter(raw, function(item) {
 			var match = false;
 			_.each(searchFields, function(field) {
@@ -62,31 +61,6 @@ var EssaysViewItems = function(cursor) {
 		});
 	}
 
-//owner
-
-
-
-
-   if(Meteor.user().roles.indexOf("admin") == -1){
-			regEx = new RegExp(Meteor.userId(), "i");
-		  searchFields = ["createdBy"];
-		filtered = _.filter(filtered, function(item) {
-			var match = false;
-			_.each(searchFields, function(field) {
-				var value = (getPropertyValue(field, item) || "") + "";
-
-				match = match || (value && value.match(regEx));
-				if(match) {
-					return false;
-				}
-			})
-			return match;
-		});
-
-}
-
-
-
 	// sort
 	if(sortBy) {
 		filtered = _.sortBy(filtered, sortBy);
@@ -100,8 +74,8 @@ var EssaysViewItems = function(cursor) {
 	return filtered;
 };
 
-var EssaysViewExport = function(cursor, fileType) {
-	var data = EssaysViewItems(cursor);
+var NotVerifiedViewExport = function(cursor, fileType) {
+	var data = NotVerifiedViewItems(cursor);
 	var exportFields = [];
 
 	var str = exportArrayOfObjects(data, exportFields, fileType);
@@ -111,20 +85,20 @@ var EssaysViewExport = function(cursor, fileType) {
 	downloadLocalResource(str, filename, "application/octet-stream");
 }
 
-Template.EssaysView.onCreated(function() {
+Template.NotVerifiedView.onCreated(function() {
 	
 });
 
-Template.EssaysView.onDestroyed(function() {
+Template.NotVerifiedView.onDestroyed(function() {
 	
 });
 
-Template.EssaysView.onRendered(function() {
-	pageSession.set("EssaysViewStyle", "table");
+Template.NotVerifiedView.onRendered(function() {
+	pageSession.set("NotVerifiedViewStyle", "table");
 	
 });
 
-Template.EssaysView.events({
+Template.NotVerifiedView.events({
 	"submit #dataview-controls": function(e, t) {
 		return false;
 	},
@@ -137,7 +111,7 @@ Template.EssaysView.events({
 			if(searchInput) {
 				searchInput.focus();
 				var searchString = searchInput.val();
-				pageSession.set("EssaysViewSearchString", searchString);
+				pageSession.set("NotVerifiedViewSearchString", searchString);
 			}
 
 		}
@@ -153,7 +127,7 @@ Template.EssaysView.events({
 				var searchInput = form.find("#dataview-search-input");
 				if(searchInput) {
 					var searchString = searchInput.val();
-					pageSession.set("EssaysViewSearchString", searchString);
+					pageSession.set("NotVerifiedViewSearchString", searchString);
 				}
 
 			}
@@ -168,7 +142,7 @@ Template.EssaysView.events({
 				var searchInput = form.find("#dataview-search-input");
 				if(searchInput) {
 					searchInput.val("");
-					pageSession.set("EssaysViewSearchString", "");
+					pageSession.set("NotVerifiedViewSearchString", "");
 				}
 
 			}
@@ -180,123 +154,123 @@ Template.EssaysView.events({
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
-		Router.go("essays.insert", mergeObjects(Router.currentRouteParams(), {}));
+		Router.go("not_verified.insert", mergeObjects(Router.currentRouteParams(), {}));
 	},
 
 	"click #dataview-export-default": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "csv");
+		NotVerifiedViewExport(this.people_list, "csv");
 	},
 
 	"click #dataview-export-csv": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "csv");
+		NotVerifiedViewExport(this.people_list, "csv");
 	},
 
 	"click #dataview-export-tsv": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "tsv");
+		NotVerifiedViewExport(this.people_list, "tsv");
 	},
 
 	"click #dataview-export-json": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "json");
+		NotVerifiedViewExport(this.people_list, "json");
 	}
 
 	
 });
 
-Template.EssaysView.helpers({
+Template.NotVerifiedView.helpers({
 
 	"insertButtonClass": function() {
-		return Essays.userCanInsert(Meteor.userId(), {}) ? "" : "hidden";
+		return People.userCanInsert(Meteor.userId(), {}) ? "" : "hidden";
 	},
 
 	"isEmpty": function() {
-		return !this.essay_list || this.essay_list.count() == 0;
+		return !this.people_list || this.people_list.count() == 0;
 	},
 	"isNotEmpty": function() {
-		return this.essay_list && this.essay_list.count() > 0;
+		return this.people_list && this.people_list.count() > 0;
 	},
 	"isNotFound": function() {
-		return this.essay_list && pageSession.get("EssaysViewSearchString") && EssaysViewItems(this.essay_list).length == 0;
+		return this.people_list && pageSession.get("NotVerifiedViewSearchString") && NotVerifiedViewItems(this.people_list).length == 0;
 	},
 	"searchString": function() {
-		return pageSession.get("EssaysViewSearchString");
+		return pageSession.get("NotVerifiedViewSearchString");
 	},
 	"viewAsTable": function() {
-		return pageSession.get("EssaysViewStyle") == "table";
+		return pageSession.get("NotVerifiedViewStyle") == "table";
 	},
 	"viewAsBlog": function() {
-		return pageSession.get("EssaysViewStyle") == "blog";
+		return pageSession.get("NotVerifiedViewStyle") == "blog";
 	},
 	"viewAsList": function() {
-		return pageSession.get("EssaysViewStyle") == "list";
+		return pageSession.get("NotVerifiedViewStyle") == "list";
 	},
 	"viewAsGallery": function() {
-		return pageSession.get("EssaysViewStyle") == "gallery";
+		return pageSession.get("NotVerifiedViewStyle") == "gallery";
 	}
 
 	
 });
 
 
-Template.EssaysViewTable.onCreated(function() {
+Template.NotVerifiedViewTable.onCreated(function() {
 	
 });
 
-Template.EssaysViewTable.onDestroyed(function() {
+Template.NotVerifiedViewTable.onDestroyed(function() {
 	
 });
 
-Template.EssaysViewTable.onRendered(function() {
+Template.NotVerifiedViewTable.onRendered(function() {
 	
 });
 
-Template.EssaysViewTable.events({
+Template.NotVerifiedViewTable.events({
 	"click .th-sortable": function(e, t) {
 		e.preventDefault();
-		var oldSortBy = pageSession.get("EssaysViewSortBy");
+		var oldSortBy = pageSession.get("NotVerifiedViewSortBy");
 		var newSortBy = $(e.target).attr("data-sort");
 
-		pageSession.set("EssaysViewSortBy", newSortBy);
+		pageSession.set("NotVerifiedViewSortBy", newSortBy);
 		if(oldSortBy == newSortBy) {
-			var sortAscending = pageSession.get("EssaysViewSortAscending") || false;
-			pageSession.set("EssaysViewSortAscending", !sortAscending);
+			var sortAscending = pageSession.get("NotVerifiedViewSortAscending") || false;
+			pageSession.set("NotVerifiedViewSortAscending", !sortAscending);
 		} else {
-			pageSession.set("EssaysViewSortAscending", true);
+			pageSession.set("NotVerifiedViewSortAscending", true);
 		}
 	}
 });
 
-Template.EssaysViewTable.helpers({
+Template.NotVerifiedViewTable.helpers({
 	"tableItems": function() {
-		return EssaysViewItems(this.essay_list);
+		return NotVerifiedViewItems(this.people_list);
 	}
 });
 
 
-Template.EssaysViewTableItems.onCreated(function() {
+Template.NotVerifiedViewTableItems.onCreated(function() {
 	
 });
 
-Template.EssaysViewTableItems.onDestroyed(function() {
+Template.NotVerifiedViewTableItems.onDestroyed(function() {
 	
 });
 
-Template.EssaysViewTableItems.onRendered(function() {
+Template.NotVerifiedViewTableItems.onRendered(function() {
 	
 });
 
-Template.EssaysViewTableItems.events({
+Template.NotVerifiedViewTableItems.events({
 	
 
-	"click td": function(e, t) {
-		e.preventDefault();
+	// "click td": function(e, t) {
+	// 	e.preventDefault();
 		
-		Router.go("essays.details", mergeObjects(Router.currentRouteParams(), {essayId: this._id}));
-		return false;
-	},
+	// 	Router.go("not_verified.details", mergeObjects(Router.currentRouteParams(), {peopleId: this._id}));
+	// 	return false;
+	// },
 
 	"click .inline-checkbox": function(e, t) {
 		e.preventDefault();
@@ -309,7 +283,7 @@ Template.EssaysViewTableItems.events({
 		var values = {};
 		values[fieldName] = !this[fieldName];
 
-		Meteor.call("essaysUpdate", this._id, values, function(err, res) {
+		Meteor.call("peopleUpdate", this._id, values, function(err, res) {
 			if(err) {
 				alert(err.message);
 			}
@@ -330,7 +304,7 @@ Template.EssaysViewTableItems.events({
 					label: "Yes",
 					className: "btn-success",
 					callback: function() {
-						Meteor.call("essaysRemove", me._id, function(err, res) {
+						Meteor.call("peopleRemove", me._id, function(err, res) {
 							if(err) {
 								alert(err.message);
 							}
@@ -347,23 +321,29 @@ Template.EssaysViewTableItems.events({
 	},
 	"click #edit-button": function(e, t) {
 		e.preventDefault();
-		Router.go("essays.update", mergeObjects(Router.currentRouteParams(), {essayId: this._id}));
+		Router.go("not_verified.update", mergeObjects(Router.currentRouteParams(), {peopleId: this._id}));
 		return false;
 	}
 });
 
-Template.EssaysViewTableItems.helpers({
+Template.NotVerifiedViewTableItems.helpers({
 	
 
 	"checked": function(value) { return value ? "checked" : "" }, 
 	"editButtonClass": function() {
-		return Essays.userCanUpdate(Meteor.userId(), this) ? "" : "hidden";
+		return People.userCanUpdate(Meteor.userId(), this) ? "" : "hidden";
 	},
 
 	"deleteButtonClass": function() {
-		return Essays.userCanRemove(Meteor.userId(), this) ? "" : "hidden";
-	},
-	createdByUserDetails: function () {
+		return People.userCanRemove(Meteor.userId(), this) ? "" : "hidden";
+			}
+		// ,
+	// "abc":function(){
+
+	// 	return People.find().count();
+	// }
+,
+createdByUserDetails: function () {
 		
 		if(this.createdBy){
         return Users.findOne({_id: this.createdBy});
@@ -372,9 +352,14 @@ Template.EssaysViewTableItems.helpers({
 
     	}
     }
-	
-    
 
-   
 });
+
+
+
+
+
+
+
+
 

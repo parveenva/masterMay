@@ -1,18 +1,14 @@
 var pageSession = new ReactiveDict();
 
-Meteor.subscribe("allUsers");
-Meteor.subscribe("people_list");
-
-
-Template.Essays.onCreated(function() {
+Template.SendEmail.onCreated(function() {
 	
 });
 
-Template.Essays.onDestroyed(function() {
+Template.SendEmail.onDestroyed(function() {
 	
 });
 
-Template.Essays.onRendered(function() {
+Template.SendEmail.onRendered(function() {
 	
 	Meteor.defer(function() {
 		globalOnRendered();
@@ -20,22 +16,22 @@ Template.Essays.onRendered(function() {
 	});
 });
 
-Template.Essays.events({
+Template.SendEmail.events({
 	
 });
 
-Template.Essays.helpers({
+Template.SendEmail.helpers({
 	
 });
 
-var EssaysViewItems = function(cursor) {
+var SendEmailViewItems = function(cursor) {
 	if(!cursor) {
 		return [];
 	}
 
-	var searchString = pageSession.get("EssaysViewSearchString");
-	var sortBy = pageSession.get("EssaysViewSortBy");
-	var sortAscending = pageSession.get("EssaysViewSortAscending");
+	var searchString = pageSession.get("SendEmailViewSearchString");
+	var sortBy = pageSession.get("SendEmailViewSortBy");
+	var sortAscending = pageSession.get("SendEmailViewSortAscending");
 	if(typeof(sortAscending) == "undefined") sortAscending = true;
 
 	var raw = cursor.fetch();
@@ -47,7 +43,7 @@ var EssaysViewItems = function(cursor) {
 	} else {
 		searchString = searchString.replace(".", "\\.");
 		var regEx = new RegExp(searchString, "i");
-		var searchFields = ["title", "Content", "document", "approval"];
+		var searchFields = [];
 		filtered = _.filter(raw, function(item) {
 			var match = false;
 			_.each(searchFields, function(field) {
@@ -62,31 +58,6 @@ var EssaysViewItems = function(cursor) {
 		});
 	}
 
-//owner
-
-
-
-
-   if(Meteor.user().roles.indexOf("admin") == -1){
-			regEx = new RegExp(Meteor.userId(), "i");
-		  searchFields = ["createdBy"];
-		filtered = _.filter(filtered, function(item) {
-			var match = false;
-			_.each(searchFields, function(field) {
-				var value = (getPropertyValue(field, item) || "") + "";
-
-				match = match || (value && value.match(regEx));
-				if(match) {
-					return false;
-				}
-			})
-			return match;
-		});
-
-}
-
-
-
 	// sort
 	if(sortBy) {
 		filtered = _.sortBy(filtered, sortBy);
@@ -100,8 +71,8 @@ var EssaysViewItems = function(cursor) {
 	return filtered;
 };
 
-var EssaysViewExport = function(cursor, fileType) {
-	var data = EssaysViewItems(cursor);
+var SendEmailViewExport = function(cursor, fileType) {
+	var data = SendEmailViewItems(cursor);
 	var exportFields = [];
 
 	var str = exportArrayOfObjects(data, exportFields, fileType);
@@ -111,20 +82,20 @@ var EssaysViewExport = function(cursor, fileType) {
 	downloadLocalResource(str, filename, "application/octet-stream");
 }
 
-Template.EssaysView.onCreated(function() {
+Template.SendEmailView.onCreated(function() {
 	
 });
 
-Template.EssaysView.onDestroyed(function() {
+Template.SendEmailView.onDestroyed(function() {
 	
 });
 
-Template.EssaysView.onRendered(function() {
-	pageSession.set("EssaysViewStyle", "table");
+Template.SendEmailView.onRendered(function() {
+	pageSession.set("SendEmailViewStyle", "table");
 	
 });
 
-Template.EssaysView.events({
+Template.SendEmailView.events({
 	"submit #dataview-controls": function(e, t) {
 		return false;
 	},
@@ -137,7 +108,7 @@ Template.EssaysView.events({
 			if(searchInput) {
 				searchInput.focus();
 				var searchString = searchInput.val();
-				pageSession.set("EssaysViewSearchString", searchString);
+				pageSession.set("SendEmailViewSearchString", searchString);
 			}
 
 		}
@@ -153,7 +124,7 @@ Template.EssaysView.events({
 				var searchInput = form.find("#dataview-search-input");
 				if(searchInput) {
 					var searchString = searchInput.val();
-					pageSession.set("EssaysViewSearchString", searchString);
+					pageSession.set("SendEmailViewSearchString", searchString);
 				}
 
 			}
@@ -168,7 +139,7 @@ Template.EssaysView.events({
 				var searchInput = form.find("#dataview-search-input");
 				if(searchInput) {
 					searchInput.val("");
-					pageSession.set("EssaysViewSearchString", "");
+					pageSession.set("SendEmailViewSearchString", "");
 				}
 
 			}
@@ -180,121 +151,119 @@ Template.EssaysView.events({
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
-		Router.go("essays.insert", mergeObjects(Router.currentRouteParams(), {}));
+		Router.go("send_email.insert", mergeObjects(Router.currentRouteParams(), {}));
 	},
 
 	"click #dataview-export-default": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "csv");
+		SendEmailViewExport(this.users_list, "csv");
 	},
 
 	"click #dataview-export-csv": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "csv");
+		SendEmailViewExport(this.users_list, "csv");
 	},
 
 	"click #dataview-export-tsv": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "tsv");
+		SendEmailViewExport(this.users_list, "tsv");
 	},
 
 	"click #dataview-export-json": function(e, t) {
 		e.preventDefault();
-		EssaysViewExport(this.essay_list, "json");
+		SendEmailViewExport(this.users_list, "json");
 	}
 
 	
 });
 
-Template.EssaysView.helpers({
+Template.SendEmailView.helpers({
 
-	"insertButtonClass": function() {
-		return Essays.userCanInsert(Meteor.userId(), {}) ? "" : "hidden";
-	},
+	
 
 	"isEmpty": function() {
-		return !this.essay_list || this.essay_list.count() == 0;
+		return !this.users_list || this.users_list.count() == 0;
 	},
 	"isNotEmpty": function() {
-		return this.essay_list && this.essay_list.count() > 0;
+		return this.users_list && this.users_list.count() > 0;
 	},
 	"isNotFound": function() {
-		return this.essay_list && pageSession.get("EssaysViewSearchString") && EssaysViewItems(this.essay_list).length == 0;
+		return this.users_list && pageSession.get("SendEmailViewSearchString") && SendEmailViewItems(this.users_list).length == 0;
 	},
 	"searchString": function() {
-		return pageSession.get("EssaysViewSearchString");
+		return pageSession.get("SendEmailViewSearchString");
 	},
 	"viewAsTable": function() {
-		return pageSession.get("EssaysViewStyle") == "table";
+		return pageSession.get("SendEmailViewStyle") == "table";
 	},
 	"viewAsBlog": function() {
-		return pageSession.get("EssaysViewStyle") == "blog";
+		return pageSession.get("SendEmailViewStyle") == "blog";
 	},
 	"viewAsList": function() {
-		return pageSession.get("EssaysViewStyle") == "list";
+		return pageSession.get("SendEmailViewStyle") == "list";
 	},
 	"viewAsGallery": function() {
-		return pageSession.get("EssaysViewStyle") == "gallery";
+		return pageSession.get("SendEmailViewStyle") == "gallery";
 	}
 
 	
 });
 
 
-Template.EssaysViewTable.onCreated(function() {
+Template.SendEmailViewTable.onCreated(function() {
 	
 });
 
-Template.EssaysViewTable.onDestroyed(function() {
+Template.SendEmailViewTable.onDestroyed(function() {
 	
 });
 
-Template.EssaysViewTable.onRendered(function() {
+Template.SendEmailViewTable.onRendered(function() {
 	
 });
 
-Template.EssaysViewTable.events({
+Template.SendEmailViewTable.events({
 	"click .th-sortable": function(e, t) {
 		e.preventDefault();
-		var oldSortBy = pageSession.get("EssaysViewSortBy");
+		var oldSortBy = pageSession.get("SendEmailViewSortBy");
 		var newSortBy = $(e.target).attr("data-sort");
 
-		pageSession.set("EssaysViewSortBy", newSortBy);
+		pageSession.set("SendEmailViewSortBy", newSortBy);
 		if(oldSortBy == newSortBy) {
-			var sortAscending = pageSession.get("EssaysViewSortAscending") || false;
-			pageSession.set("EssaysViewSortAscending", !sortAscending);
+			var sortAscending = pageSession.get("SendEmailViewSortAscending") || false;
+			pageSession.set("SendEmailViewSortAscending", !sortAscending);
 		} else {
-			pageSession.set("EssaysViewSortAscending", true);
+			pageSession.set("SendEmailViewSortAscending", true);
 		}
 	}
 });
 
-Template.EssaysViewTable.helpers({
+Template.SendEmailViewTable.helpers({
 	"tableItems": function() {
-		return EssaysViewItems(this.essay_list);
+		return SendEmailViewItems(this.users_list);
 	}
 });
 
 
-Template.EssaysViewTableItems.onCreated(function() {
+Template.SendEmailViewTableItems.onCreated(function() {
 	
 });
 
-Template.EssaysViewTableItems.onDestroyed(function() {
+Template.SendEmailViewTableItems.onDestroyed(function() {
 	
 });
 
-Template.EssaysViewTableItems.onRendered(function() {
+Template.SendEmailViewTableItems.onRendered(function() {
 	
 });
 
-Template.EssaysViewTableItems.events({
+Template.SendEmailViewTableItems.events({
 	
 
 	"click td": function(e, t) {
 		e.preventDefault();
 		
-		Router.go("essays.details", mergeObjects(Router.currentRouteParams(), {essayId: this._id}));
+		Router.go("send_email.details", mergeObjects(Router.currentRouteParams(), {usersId: this._id}));
 		return false;
 	},
 
@@ -309,7 +278,7 @@ Template.EssaysViewTableItems.events({
 		var values = {};
 		values[fieldName] = !this[fieldName];
 
-		Meteor.call("essaysUpdate", this._id, values, function(err, res) {
+		Meteor.call("usersUpdate", this._id, values, function(err, res) {
 			if(err) {
 				alert(err.message);
 			}
@@ -330,7 +299,7 @@ Template.EssaysViewTableItems.events({
 					label: "Yes",
 					className: "btn-success",
 					callback: function() {
-						Meteor.call("essaysRemove", me._id, function(err, res) {
+						Meteor.call("usersRemove", me._id, function(err, res) {
 							if(err) {
 								alert(err.message);
 							}
@@ -347,34 +316,20 @@ Template.EssaysViewTableItems.events({
 	},
 	"click #edit-button": function(e, t) {
 		e.preventDefault();
-		Router.go("essays.update", mergeObjects(Router.currentRouteParams(), {essayId: this._id}));
+		Router.go("send_email.update", mergeObjects(Router.currentRouteParams(), {usersId: this._id}));
 		return false;
 	}
 });
 
-Template.EssaysViewTableItems.helpers({
+Template.SendEmailViewTableItems.helpers({
 	
 
 	"checked": function(value) { return value ? "checked" : "" }, 
 	"editButtonClass": function() {
-		return Essays.userCanUpdate(Meteor.userId(), this) ? "" : "hidden";
+		return Users.isAdmin(Meteor.userId()) ? "" : "hidden";
 	},
 
 	"deleteButtonClass": function() {
-		return Essays.userCanRemove(Meteor.userId(), this) ? "" : "hidden";
-	},
-	createdByUserDetails: function () {
-		
-		if(this.createdBy){
-        return Users.findOne({_id: this.createdBy});
-    	}else{
-        return People.findOne({_id: this.peopleID});
-
-    	}
-    }
-	
-    
-
-   
+		return Users.isAdmin(Meteor.userId()) ? "" : "hidden";
+	}
 });
-

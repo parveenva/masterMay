@@ -1,17 +1,17 @@
-<template name="EssaysInsert">
+<template name="NotVerifiedInsert">
 	<div class="page-container container" id="content">
 		<div class="row" id="title_row">
 			<div class="col-md-12">
 			</div>
 		</div>
-		{{> EssaysInsertForm}}
+		{{> NotVerifiedInsertForm}}
 	</div>
 </template>
 
-<template name="EssaysInsertForm">
-	<div id="essays-insert-form" class="">
+<template name="NotVerifiedInsertForm">
+	<div id="not-verified-insert-form" class="">
 		<h2 id="component-title">
-			New Essay
+			New People
 		</h2>
 		<form role="form">
 			{{#if errorMessage}}
@@ -25,25 +25,33 @@
 				{{infoMessage}}
 			</div>
 			{{/if}}
-			<div class="form-group  field-title">
-				<label for="title">
-					Essay Prompt
+			<div class="form-group  field-first-name">
+				<label for="firstName">
 				</label>
 				<div class="input-div">
-					<input type="text" name="title" value="" class="form-control " autofocus="autofocus" data-type="string">
+					<input type="text" name="firstName" value="" class="form-control " autofocus="autofocus" data-type="string">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
 				</div>
 			</div>
-			<div class="form-group  field-content">
-				<label for="Content">
-					Essay
+			<div class="form-group  field-last-name">
+				<label for="lastName">
 				</label>
 				<div class="input-div">
-					<textarea class="form-control " name="Content" id="Content"></textarea>
-					<input type="hidden" name="approval" value="Pending" class="form-control " data-type="string">
+					<input type="text" name="lastName" value="" class="form-control " data-type="string">
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group  field-email">
+				<label for="email">
+				</label>
+				<div class="input-div">
+					<input type="text" name="email" value="" class="form-control " data-type="string">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
@@ -52,7 +60,7 @@
 			</div>
 			<div class="form-group">
 				<div class="submit-div">
-					<a href="" id="form-cancel-button" class="btn btn-default">
+					<a href="#" id="form-cancel-button" class="btn btn-default">
 						Cancel
 					</a>
 					<button id="form-submit-button" class="btn btn-success" type="submit">

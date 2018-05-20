@@ -42,7 +42,7 @@ i {
 /* Footer */
 .footer {
     position: relative;
-    background-color: #092746;
+    background-color: #343c37;
     color: #7d7975;
     padding: 95px 0 50px;
     font-size:16px;
@@ -323,3 +323,55 @@ i {
         white-space: normal !important;
         word-wrap: break-word !important;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .search-text{
+   padding-bottom:5px;
+}
+    
+.search-text .input-search{
+    height:45px;
+    width:40%;
+    padding-left:20px;
+    color:#333;
+} 
+.search-text .footmod{
+    height:65px;
+    width:22%;
+    padding-left:10px;
+    color:#333;
+} 
+
+
+.search-text .btn-search{
+    background: #545454;
+    font-family:Roboto;
+    border:none;
+    color:#FFF;
+    height: 45px;
+    width: 80px;
+}
+
+.search-text h4{
+    color:#888582;
+    font-weight: 700;
+}
+
+footer{
+    background-color:#222222;
+    padding: 60px 0px;
+
+
+}

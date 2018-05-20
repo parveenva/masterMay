@@ -43,7 +43,11 @@ Router.privateRoutes = [
 	"colleges.insert",
 	"colleges.update",
 	
-	"home_dash"
+	"home_dash",
+	"not_verified",
+	"not_verified.details",
+	"not_verified.insert",
+	"not_verified.update"
 ];
 
 Router.freeRoutes = [
@@ -170,5 +174,8 @@ else {
   name: 'AddStudentData'
 });
 
+this.route("/not_verified", {name: "not_verified", title: "", controller: "NotVerifiedController"});
+	this.route("/not_verified/details/:peopleId", {name: "not_verified.details", title: "", controller: "NotVerifiedDetailsController"});
+	this.route("/not_verified/insert", {name: "not_verified.insert", title: "", controller: "NotVerifiedInsertController"});
+	this.route("/not_verified/update/:peopleId", {name: "not_verified.update", title: "", controller: "NotVerifiedUpdateController"});
 });
-
