@@ -18,7 +18,7 @@ Meteor.startup(function() {
 			process.env[variableName] = Meteor.settings.env[variableName];
 		}
 	}
-  process.env.MAIL_URL="smtp://xgendemo:R1tew0rk@gm@smtp.gmail.com:587/";	//
+  process.env.MAIL_URL="smtp://xgendemo:R1tew0rk@smtp.gmail.com:587/";	//
 	// Setup OAuth login service configuration (read from Meteor.settings)
 	//
 	// Your settings file should look like this:

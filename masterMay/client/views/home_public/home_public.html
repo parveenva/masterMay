@@ -21,43 +21,40 @@
 
 <template name="HomePublicJumbotronJumbotronContent">
 	<p>Welcome to
-	<h1  style="position: relative; top: -50px;">
+	<h1  style="position: relative; top: -70px;">
 		Open College Essays
 	</h1>
 	</p>
-	 <p style="position: relative; top: -20px;">
+	 <p style="position: relative; top: -70px;">
 Our goal is to build the world’s largest open source repository of college essays with your help!	</p> 
-	<a href={{nextURL}} class="btn btn-lg btn-warning btn-wrap-text animate a-pulse a-infinite">
+	<a href={{nextURL}} class="btn btn-lg btn-warning btn-wrap-text  "  style="position: relative; top: -50px;">
 		Seniors, submit your essays and get a $50 gift card!
 	</a>
 </template>
 
 <template name="HomePublicSection4" id="section4">
 	<section style="position: relative; top: -70px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12" id="content">
+ 			<div class="col-lg-12">
+				 
 					{{> HomePublicSection4AllEssaysHome}}
-				</div>
-			</div>
-		</div>
+				 
+ 		</div>
 	</section>
 </template>
 
 <template name="HomePublicSection4AllEssaysHome">
 	<div class="col-md-12">
-		<h1 id="section4">
+		<h1 id="section4" style="position: relative; top: -30px;">
 			Recent Essays
 		</h1>
 	</div>
-	<div class="index-content">
-		<div class="container">
-			{{#each pendingEssayList}}
+	<div class="index-content" style="position: relative; top: -50px;">
+ 			{{#each pendingEssayList}}
 			<a href="#">
 				<div class="col-lg-4">
 					<div class="card">
-						<img src="http://cevirdikce.com/proje/hasem-2/images/finance-1.jpg">
-						<h4>
+						 
+						<h4 class="myclass">
 							{{title}}
 						</h4>
 						<p class="myclass">
@@ -70,12 +67,11 @@ Our goal is to build the world’s largest open source repository of college ess
 				</div>
 			</a>
 			{{/each}}
-		</div>
-	</div>
+ 	</div>
 </template>
 
 <template name="HomePublicPublicFooter">
-	<div class="footer-section">
+	<div class="footer-section" >
 		<div class="footer">
 			<div class="container">
 				<div class="col-md-4 footer-one">
