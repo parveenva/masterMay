@@ -170,3 +170,33 @@ var peopleID =  People.insert(docA, function(err, id) {
         return true;
     },
 });
+
+
+
+  
+Template.DashboardPage.events({
+  'click #cae': function(event, template){
+   
+
+ 
+console.log("clicked");
+Session.set("isEditSession", "true");
+
+  },
+//   'click #sse': function(event, template){
+   
+
+ 
+// console.log("clicked");
+// Session.set("isEditSession", "false");
+
+//   }
+});
+
+
+Template.DashboardPage.helpers({
+        isEdit: function() {
+            console.log("edit helper : " + Session.get("isEditSession"));
+            return Session.get("isEditSession");
+        }
+    });

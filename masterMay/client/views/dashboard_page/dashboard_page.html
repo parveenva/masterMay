@@ -63,13 +63,13 @@
 
 
         <label>
-          <input type="radio" value="Common App Essay " name="Gender" id="cae" required="" checked="checked" >
+          <input type="radio" value="Common App Essay " name="Gender"  required="" checked="checked" id="sse">
           Common App Essay 
         </label>
       </div>
-      <div class="radio-inline">
-        <label>
-          <input type="radio" value="School Specific Essay" name="Gender" required="">
+      <div class="radio-inline" id="pick">
+        <label id="curl">
+          <input type="radio" value="School Specific Essay" name="Gender" required="" id="cae">
           School Specific Essay
         </label>
       </div>
@@ -77,14 +77,29 @@
     
     </div>
   </div>
- 
- <div class="col-md-7  form-group {{#if afFieldIsInvalid name='commonAppSchool'}}has-error{{/if}}">
+
+
+  {{isEdit}}
+
+    {{#if isEdit}}
+       <div class="col-md-7  form-group {{#if afFieldIsInvalid name='commonAppSchool'}}has-error{{/if}}">
+    <label class="control-label">{{afFieldLabelText name='School Specific Essay'}}School Specific Essay</label>
+    {{> afFieldInput name='commonAppSchool'}}
+    {{#if afFieldIsInvalid name='commonAppSchool'}}
+    <span class="help-block">{{{afFieldMessage name='commonAppSchool'}}}</span>
+    {{/if}}
+  </div>
+        {{else}}
+        <div class="col-md-7  form-group {{#if afFieldIsInvalid name='commonAppSchool'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='commonAppSchool'}}</label>
     {{> afFieldInput name='commonAppSchool'}}
     {{#if afFieldIsInvalid name='commonAppSchool'}}
     <span class="help-block">{{{afFieldMessage name='commonAppSchool'}}}</span>
     {{/if}}
   </div>
+    {{/if}}
+ 
+ 
 
 
 
