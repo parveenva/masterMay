@@ -97,14 +97,32 @@ Template.HomePublicPublicFooter.events({
 
 	"click #footer-button": function(e, t) {
    formSubmitted.set(true);
-	},
+   console.log("function eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeme ara hai");
+	}, 
 
+	'submit #search-form' : function(e, t) {console.log("function me ara hai");
+		e.preventDefault();
+
+var remail = t.find('#remail').value.trim();		
+		if(!isValidEmail(remail))
+		{
+			pageSession.set("errorMessage", "Please enter valid e-mail address.");
+			t.find('#remail').focus();
+			return false;
+		}
+
+
+}
 });
   formSubmitted = new ReactiveVar( false );
+  errorMessage = new ReactiveVar( false );
 
 Template.HomePublicPublicFooter.helpers({
 "formSubmitted": function() {
 		 
 		  return formSubmitted.get();
+	},
+	"errorMessage": function() {
+		return pageSession.get("errorMessage");
 	},
 });

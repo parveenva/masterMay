@@ -413,3 +413,43 @@ footer{
     color : #fff;
 }
  
+.aboutSet{
+     text-align: center;
+}
+
+
+.preamble {
+    clear: right; 
+    padding: 0px 10px 0 10px;
+    font: 75% georgia, sans-serif;
+    }
+
+
+    .intro { 
+    min-width: 470px;
+    width: 100%;
+    }
+
+
+    .page-wrapper { 
+    
+    padding: 0 175px 0 110px;  
+    margin: 0; 
+    position: relative;
+    }
+
+    .h3 { 
+    font: italic normal 1.4em georgia, sans-serif;
+    letter-spacing: 1px; 
+    margin-bottom: 0; 
+    color: #7D775C;
+    }
+    .p { 
+    margin-top: 0; 
+    text-align: justify;
+    }
+   /* .pClassAu {
+font-style: ABeeZee italic;
+
+
+    }*/
