@@ -72,27 +72,43 @@ Our goal is to build the world’s largest open source repository of college ess
 
 <template name="HomePublicPublicFooter">
  	<div class="footer-section">
-		 <footer style="margin-top:300px;">
+		 <footer >
         
-        <div class="search-text"> 
-            <div class="container">
+             <div class="container" align="right">
                 <div class="row text-center">
-                 
-                   <div class="form">
-                      
+                 {{#if formSubmitted }}
+<div class="footer-text" align="center">
+                       <p  >
+Thanks for joining our mailing list!	</p>
+</div>
+
+                         {{else}} 
+
+                   <div class="form" align="center">
+                       <p  >
+Join our mailing list and stay updated!	</p>
                         <form id="search-form" class="form-search form-horizontal">
-                        	<input type="text" class="footmod" placeholder="First Name">
-                        	
+                        	 
                             <input type="text" class="footmod" placeholder="Email Address">
-                            <a href={{nextURL}} class="btn btn-lg btn-warning btn-wrap-text animate a-pulse a-infinite">
-		Join the Email List!
-	</a>
+                           <a id = "footer-button" href="" class="footer-button blue-button">
+							Join!
+						</a>
+		
                         </form>
                     </div>
-                
-                </div>         
-            </div>     
-        </div>
+
+                    {{/if}}
+
+                </div>   
+
+                <div id="footer" class="sticky-footer" align="center">
+		<div class="footer-container container">
+			<p class="text-muted">
+				About us
+			</p>
+		</div>
+	</div>      
+         </div>
         
        
       
@@ -102,3 +118,4 @@ Our goal is to build the world’s largest open source repository of college ess
 	</div>
 </template>
 
+ 

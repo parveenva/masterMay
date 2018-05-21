@@ -1,3 +1,5 @@
+import { ReactiveVar } from 'meteor/reactive-var'
+
 Template.HomePublic.onCreated(function() {
 	
 });
@@ -93,8 +95,16 @@ Template.HomePublicSection4AllEssaysHome.helpers({
 
 Template.HomePublicPublicFooter.events({
 
+	"click #footer-button": function(e, t) {
+   formSubmitted.set(true);
+	},
+
 });
+  formSubmitted = new ReactiveVar( false );
 
 Template.HomePublicPublicFooter.helpers({
-
+"formSubmitted": function() {
+		 
+		  return formSubmitted.get();
+	},
 });

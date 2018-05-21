@@ -214,6 +214,24 @@ i {
     border-color: #ff7518;*/
  
 }
+.blue-button{
+    width: 100px;
+    -webkit-transition: background-color 1s , color 1s; /* For Safari 3.1 to 6.0 */
+    transition: background-color 1s , color 1s;
+    min-height: 20px;
+     background-color: #ff7518;
+    color: #ffffff; 
+    border-radius: 4px;
+    text-align: center;
+    font-weight: lighter;
+    margin: 0px 20px 15px 20px;
+    padding: 5px 0px;
+    display: inline-block;
+        /*color: #ffffff;
+    background-color: #ff7518;
+    border-color: #ff7518;*/
+ 
+}
 .index-content .blue-button:hover{
     background-color: #dadada;
     color: #002E5B;
@@ -359,12 +377,7 @@ i {
     padding-left:20px;
     color:#333;
 } 
-.search-text .footmod{
-    height:65px;
-    width:22%;
-    padding-left:10px;
-    color:#333;
-} 
+  
 
 
 .search-text .btn-search{
@@ -383,8 +396,20 @@ i {
 
 footer{
     background-color:#222222;
-    padding: 60px 0px;
+    padding: 30px 0px;
+   padding-bottom:5px;
 
 
+}
+
+.footmod{
+    
+     padding-left:10px;
+    color:#333;
+} 
+
+.footer-section p {
+    line-height:26px;
+    color : #fff;
 }
  
