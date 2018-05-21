@@ -1,4 +1,5 @@
 var pageSession = new ReactiveDict();
+isSchoolEssay = new ReactiveVar( false );
 
 Template.EssaysInsert.onCreated(function() {
 	
@@ -9,7 +10,8 @@ Template.EssaysInsert.onDestroyed(function() {
 });
 
 Template.EssaysInsert.onRendered(function() {
-	
+	    isSchoolEssay.set(false);
+
 	Meteor.defer(function() {
 		globalOnRendered();
 		$("input[autofocus]").focus();
@@ -35,6 +37,7 @@ Template.EssaysInsertForm.onDestroyed(function() {
 
 Template.EssaysInsertForm.onRendered(function() {
 	
+  Session.set("essaysTopMsg", "Submit your college essays and get a free $50 gift card." );
 
 	pageSession.set("essaysInsertFormInfoMessage", "");
 	pageSession.set("essaysInsertFormErrorMessage", "");
@@ -73,6 +76,18 @@ Template.EssaysInsertForm.onRendered(function() {
 });
 
 Template.EssaysInsertForm.events({
+
+	'click #sse': function(event, template){
+    
+    isSchoolEssay.set(true);
+
+  },
+  'click #cae': function(event, template){
+    
+    isSchoolEssay.set(false);
+
+  },
+ 
 	"submit": function(e, t) {
 		e.preventDefault();
 		pageSession.set("essaysInsertFormInfoMessage", "");
@@ -165,10 +180,19 @@ Template.EssaysInsertForm.helpers({
 	},
 	"errorMessage": function() {
 		return pageSession.get("essaysInsertFormErrorMessage");
-	}
+	},
+	isSchoolEssay: function() {
+                  return isSchoolEssay.get();
+
+        }
 	
 });
 
 function myCustomOnPageLoad() {
     alert("We are nearly ready to rumble!!");
 }
+
+
+ 
+
+ 

@@ -1,11 +1,16 @@
+import { ReactiveVar } from 'meteor/reactive-var'
+
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
  SimpleSchema.extendOptions(['autoform']);
 
 
 Schemas = {};
+  Session.set("essaysTopMsg", "Submit your college essays and get a free $50 gift card." );
 
 Template.DashboardPage.onRendered(function() {
+  Session.set("essaysTopMsg", "Submit your college essays and get a free $50 gift card." );
+
 
  tinymce.EditorManager.editors = [];
   tinymce.init({
@@ -37,14 +42,36 @@ Schemas.Person = new SimpleSchema({
 
 
 Schemas.essayInformation = new SimpleSchema({
-   title:{
-    type: String ,
-         label: "Essay Prompt"
+  
+  title: {
+    type: String,
 
+    label: 'Essay Prompt',
+    autoform: {
+         type: 'textarea',
+          id: 'Essay Prompt'
+      }
+    },
+    essayCategory: {
+    type: String,
+        label: 'Common App or School Specific',
+
+    autoform: {
+      afFieldInput: {
+        options: function () { return {
+          common: 'Common App Essay',
+          school: 'School Specific Essay',
+         
+        } }
+      }
+    }
   },
-  commonAppSchool: {
-    type: String, 
-     label: "Common App/School"
+  schoolName: {
+    type: String ,
+    optional:true,
+     autoform: {
+         placeholder: 'School name'
+       }
   },
   Content: {
     type: String,
@@ -61,9 +88,16 @@ Schemas.essayInformation1 = new SimpleSchema({
   title:{
     type: String 
   },
-  commonAppSchool: {
-    type: String 
+  essayCategory: {
+    type: String ,
+             optional:true
+
  
+  },
+  schoolName: {
+    type: String ,
+             optional:true
+
   },
   Content: {
     type: String 
@@ -124,8 +158,7 @@ for (var key in schemaB) {
     onSubmit: function (insertDoc, updateDoc, currentDoc) {
         this.event.preventDefault();
         
- 
-        var docA = {};
+         var docA = {};
             var docB = {};
             
             for (var key in Schemas.essayInformation.schema()) {
@@ -175,28 +208,24 @@ var peopleID =  People.insert(docA, function(err, id) {
 
   
 Template.DashboardPage.events({
-  'click #cae': function(event, template){
-   
-
+  
  
-console.log("clicked");
-Session.set("isEditSession", "true");
-
-  },
-//   'click #sse': function(event, template){
-   
-
- 
-// console.log("clicked");
-// Session.set("isEditSession", "false");
-
-//   }
 });
 
-
+ 
 Template.DashboardPage.helpers({
-        isEdit: function() {
-            console.log("edit helper : " + Session.get("isEditSession"));
-            return Session.get("isEditSession");
-        }
+         
     });
+
+
+Template.essaysTop.helpers({
+        essaysTopMsg: function() {
+                  return Session.get("essaysTopMsg");
+
+
+        } 
+    });
+
+Template.addmore.onRendered(function() {
+ Session.set("essaysTopMsg", "Thank you for the submission." );
+});

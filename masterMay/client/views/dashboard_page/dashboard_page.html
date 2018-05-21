@@ -4,16 +4,13 @@
 <!-- {{wizardId}}
  -->
 
-   
+       {{> essaysTop}}
 
-	<div class="page-container container"  >
-		<div class="row" id="title_row">
-			<div class="col-md-12">
-				<h2 id="component-title">
-            Submit your college essays and get a free $50 gift card
-        </h2>
-			</div>
-		</div>
+
+	<div style="position: relative; top: 30px;" class=" page-container container"  >
+
+
+	
 		<div class="row" id="title_row">
 			<div >
 
@@ -37,7 +34,7 @@
     <span class="help-block">{{{afFieldMessage name='lastName'}}}</span>
     {{/if}}
   </div>
-  <div class=" col-md-7  form-group {{#if afFieldIsInvalid name='Email'}}has-error{{/if}}">
+  <div class=" col-md-6  form-group {{#if afFieldIsInvalid name='Email'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='Email'}}</label>
     {{> afFieldInput name='Email'}}
     {{#if afFieldIsInvalid name='Email'}}
@@ -46,7 +43,7 @@
   </div>
 
 
- <div class="col-md-7  form-group {{#if afFieldIsInvalid name='title'}}has-error{{/if}}">
+ <div class="col-md-12  form-group {{#if afFieldIsInvalid name='title'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='title'}}</label>
     {{> afFieldInput name='title'}}
     {{#if afFieldIsInvalid name='title'}}
@@ -54,58 +51,25 @@
     {{/if}}
   </div>
 
-<div class="form-group">
-   
-    <div class="col-lg-10">
-    <div class="af-radio-group" data-schema-key="Gender">
-      <div class="radio-inline">
-        
+ 
+<div class="col-md-12  form-group {{#if afFieldIsInvalid name='title'}}has-error{{/if}}">
+    <label class="control-label">{{afFieldLabelText name='essayCategory'}}</label>
+    {{> afFieldInput name='essayCategory' type="select-radio-inline"}}
 
-
-        <label>
-          <input type="radio" value="Common App Essay " name="Gender"  required="" checked="checked" id="sse">
-          Common App Essay 
-        </label>
+     {{#if afFieldValueIs name="essayCategory" value="school"}}
+     <div style="position: relative; left: -11px;" class="col-md-6  form-group  ">
+    {{> afFieldInput name="schoolName"}}
       </div>
-      <div class="radio-inline" id="pick">
-        <label id="curl">
-          <input type="radio" value="School Specific Essay" name="Gender" required="" id="cae">
-          School Specific Essay
-        </label>
-      </div>
-  </div>   
-    
-    </div>
-  </div>
 
+  {{/if}}
 
-  {{isEdit}}
-
-    {{#if isEdit}}
-       <div class="col-md-7  form-group {{#if afFieldIsInvalid name='commonAppSchool'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='School Specific Essay'}}School Specific Essay</label>
-    {{> afFieldInput name='commonAppSchool'}}
-    {{#if afFieldIsInvalid name='commonAppSchool'}}
-    <span class="help-block">{{{afFieldMessage name='commonAppSchool'}}}</span>
+    {{#if afFieldIsInvalid name='essayCategory'}}
+    <span class="help-block">{{{afFieldMessage name='essayCategory'}}}</span>
     {{/if}}
   </div>
-        {{else}}
-        <div class="col-md-7  form-group {{#if afFieldIsInvalid name='commonAppSchool'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='commonAppSchool'}}</label>
-    {{> afFieldInput name='commonAppSchool'}}
-    {{#if afFieldIsInvalid name='commonAppSchool'}}
-    <span class="help-block">{{{afFieldMessage name='commonAppSchool'}}}</span>
-    {{/if}}
-  </div>
-    {{/if}}
- 
- 
 
-
-
- 
-
- <div class="col-md-12  form-group {{#if afFieldIsInvalid name='Content'}}has-error{{/if}}">
+     
+<div class="col-md-12  form-group {{#if afFieldIsInvalid name='Content'}}has-error{{/if}}">
     <label class="control-label">{{afFieldLabelText name='Content'}}</label>
     {{> afFieldInput name='Content'}}
     {{#if afFieldIsInvalid name='Content'}}
@@ -159,7 +123,7 @@
 
 
 <template name="addmore">
-
+   {{> essaysTop}}
 	<div class="row" id="title_row">
 			<div class="col-md-12">
 			</div>
@@ -167,9 +131,7 @@
 <!-- {{wizardId}}
  -->
 
-   <h2 id="component-title">
-            
-        </h2>
+    
 
 	<div class="page-container container"  >
 		<div class="row" id="title_row">
@@ -177,9 +139,12 @@
 
    
 		 
- 			<h2>
-				Thank you for the submission.  
-			</h2>
+ 		 
+<h2>
+      Do you have additional school specific essays to submit? <br/>
+      To receive the $50 Gift card, please include: <br/>One common app essay and two school specific essays.
+</h2>
+
  		<div> 
 		<a href="/essays/insert" class="btn btn-primary"> Submit another Essay.
 		</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="register" class="btn btn-primary"> Done.
@@ -192,4 +157,17 @@
 </div>
 </template>
 
+<template name="essaysTop">
+ 
 
+  <div class="essaysTop-div" >
+    <div id="content" class="container">
+         <h2 id="component-title">
+          {{essaysTopMsg}}
+            
+           
+        </h2>
+     </div>
+     </div>
+
+</template>
