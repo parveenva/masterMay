@@ -16,6 +16,11 @@ Meteor.methods({
 		Essays.update({ _id: id }, { $set: data });
 	},
 
+"essaysUpdateManyBP": function(id, data) {
+		
+		Essays.update({ "peopleID": id }, { $set:{"createdBy":data}  }, { multi: true });
+	},
+
 	"essaysRemove": function(id) {
 		var doc = Essays.findOne({ _id: id });
 		if(!Essays.userCanRemove(this.userId, doc)) {

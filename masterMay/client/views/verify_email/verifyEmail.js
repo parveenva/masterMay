@@ -34,21 +34,23 @@ Template.verified.onDestroyed(function() {
 
    var  peopleID = People.findOne({"Email":email},{ fields: { "_id": 1 }});
 
-			//alert("peopleID---"+peopleID._id);
-
-
-			   var  essayID = Essays.findOne({"peopleID":peopleID._id},{ fields: { "_id": 1 }});
-		
-			//alert("essayID---"+essayID._id);
-
-			Essays.update({"_id":essayID._id},{$set:{"createdBy":userID}},function(error, result){
+			// alert("peopleID---"+peopleID._id);
+Meteor.call("essaysUpdateManyBP", peopleID._id, userID, function(err, res) {
+			if(err) {
+				alert(err.message);
+			}else{
+                              //alert("done");
+            
+            }
+		});
+	  			/*Essays.update({"peopleID":peopleID._id},{$set:{"createdBy":userID}},function(error, result){
             if(error){
               alert(error);
             }else{
-                             // alert("done");
+                              alert("done");
             
             }
-          });
+          });*/
 }
 
 });
