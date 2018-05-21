@@ -11,7 +11,8 @@ Router.publicRoutes = [
 	"register",
 	"forgot_password",
 
-	"reset_password"
+	"reset_password",
+	"aboutUs"
 ];
 
 Router.privateRoutes = [
@@ -56,8 +57,8 @@ Router.freeRoutes = [
 	"dashboard_page",
 	"readblog",
 	"more_essay",
-		"essays.insert"
-
+		"essays.insert",
+"aboutUs"
 ];
 
 Router.roleMap = [
@@ -178,4 +179,10 @@ this.route("/not_verified", {name: "not_verified", title: "", controller: "NotVe
 	this.route("/not_verified/details/:peopleId", {name: "not_verified.details", title: "", controller: "NotVerifiedDetailsController"});
 	this.route("/not_verified/insert", {name: "not_verified.insert", title: "", controller: "NotVerifiedInsertController"});
 	this.route("/not_verified/update/:peopleId", {name: "not_verified.update", title: "", controller: "NotVerifiedUpdateController"});
+
+this.route("/aboutUs", {name: "aboutUs", title: "", controller: "AboutUsController"});
+this.route('aboutUs1', {
+        path: '/aboutUs1',
+        template: 'aboutUs1'
+    });
 });

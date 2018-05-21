@@ -87,10 +87,15 @@ Thanks for joining our mailing list!	</p>
                    <div class="form" align="center">
                        <p  >
 Join our mailing list and stay updated!	</p>
+
                         <form id="search-form" class="form-search form-horizontal">
-                        	 
-                            <input type="text" class="footmod" placeholder="Email Address">
-                           <a id = "footer-button" href="" class="footer-button blue-button">
+                        	{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}} 
+                            <input type="text" class="footmod" placeholder="Email Address" id="remail">
+                           <a id = "footer-button" href="" class="footer-button blue-button" type="submit">
 							Join!
 						</a>
 		
@@ -99,23 +104,28 @@ Join our mailing list and stay updated!	</p>
 
                     {{/if}}
 
-                </div>   
+                
 
                 <div id="footer" class="sticky-footer" align="center">
-		<div class="footer-bottom">
-			 
-				About us
-			 
-		</div>
+
+		<div class="footer-container container">
+			<p class="text-muted">
+				
+				<a href="aboutUs" class="">
+							About us
+						</a>
+			</p>
+
+		
 	</div>      
          </div>
         
-       
+       </div>
+   </div>
       
     </footer>
-    
+</div>
 
-	</div>
 </template>
 
  
