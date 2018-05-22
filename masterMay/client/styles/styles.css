@@ -164,8 +164,8 @@ i {
     color: black;
 }
 .index-content .card{
-/*     background-image: url("/images/esaays.jpeg");
-*/    padding:0;
+     /*background-image: url("/images/esaays.jpeg");*/
+    padding:0;
      opacity: 0.8;
          min-height: 320px;
 
@@ -296,7 +296,7 @@ i {
   max-height: 6.9em;
   line-height: 1.5em;
      font-weight: 700;
-
+border-bottom: 2px solid #ff7518;
 }
 
 
