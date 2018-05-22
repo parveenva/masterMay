@@ -76,13 +76,13 @@ Our goal is to build the world’s largest open source repository of college ess
         
              <div class="container" align="right">
                 <div class="row text-center">
-                 {{#if formSubmitted }}
+<!--               {{#if formSubmitted }} 
 <div class="footer-text" align="center">
                        <p  >
 Thanks for joining our mailing list!	</p>
 </div>
 
-                         {{else}} 
+                         {{else}}  --> 
 
                    <div class="form" align="center">
                        
@@ -95,17 +95,20 @@ Join our mailing list and stay updated!	</p>
 				{{errorMessage}}
 			</div>
 			{{/if}} 
-                            <input type="text" class="form-control col-md-4" placeholder="Email Address" id="email">
+                            <input id="register_email" type="text" class="form-control" placeholder="Your email" required>
                            <a id = "footer-button" href="" class="footer-button blue-button" type="submit">
 							Subscribe!
 						</a>
+
+
+
+						
 		
                         </form>
                     </div>
 
-                    {{/if}}
 
-            <!--     
+            <!--     id="register_email" type="text" class="form-control" placeholder="Your email" required
 
                 <div id="footer" class="sticky-footer" align="center">
 
