@@ -31,3 +31,13 @@ Template.aboutUs1.onRendered(function() {
  Session.set("essaysTopMsg", "" );
 
 });
+
+
+Template.RegisterTerms.onRendered(function() {
+		//alert("Meteor.userId()"+Meteor.userId());
+
+
+ Session.set("essaysTopMsg", "" );
+
+});
+

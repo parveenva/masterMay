@@ -185,4 +185,9 @@ this.route('aboutUs1', {
         path: '/aboutUs1',
         template: 'aboutUs1'
     });
+
+this.route('RegisterTerms', {
+        path: '/RegisterTerms',
+        template: 'RegisterTerms'
+    });
 });
