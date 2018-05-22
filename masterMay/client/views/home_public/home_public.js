@@ -1,5 +1,5 @@
 import { ReactiveVar } from 'meteor/reactive-var'
-
+var pageSession = new ReactiveDict();
 Template.HomePublic.onCreated(function() {
 	
 });
@@ -73,7 +73,7 @@ Template.HomePublicSection4.helpers({
 Template.HomePublicSection4AllEssaysHome.events({
 
 	
-			"click .blue-button": function(e, t) {
+			"click .card": function(e, t) {
 		
 
 localStorage.setItem('essayId',this._id);
@@ -96,33 +96,34 @@ Template.HomePublicSection4AllEssaysHome.helpers({
 Template.HomePublicPublicFooter.events({
 
 	"click #footer-button": function(e, t) {
-   formSubmitted.set(true);
-   console.log("function eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeme ara hai");
-	}, 
+   // formSubmitted.set(true);
+   // console.log("function eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeme ara hai");
+	// }, 
 
-	'submit #search-form' : function(e, t) {console.log("function me ara hai");
-		e.preventDefault();
+	// 'submit #search-form' : function(e, t) {console.log("function me ara hai");
+	// 	e.preventDefault();
 
-var remail = t.find('#remail').value.trim();		
-		if(!isValidEmail(remail))
-		{
+var register_email = t.find('#register_email').value.trim();		
+		if(!isValidEmail(register_email))
+		{   console.log("2345647");
+
 			pageSession.set("errorMessage", "Please enter valid e-mail address.");
-			t.find('#remail').focus();
+			t.find('#register_email').focus();
 			return false;
 		}
 
 
 }
 });
-  formSubmitted = new ReactiveVar( false );
-  errorMessage = new ReactiveVar( false );
+  // formSubmitted = new ReactiveVar( false );
+  // errorMessage = new ReactiveVar( false );
 
 Template.HomePublicPublicFooter.helpers({
-"formSubmitted": function() {
+// "formSubmitted": function() {
 		 
-		  return formSubmitted.get();
-	},
-	"errorMessage": function() {
+// 		  return formSubmitted.get();
+// 	},
+		errorMessage: function() {
 		return pageSession.get("errorMessage");
 	},
 });
