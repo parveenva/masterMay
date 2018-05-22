@@ -167,6 +167,8 @@ i {
 /*     background-image: url("/images/esaays.jpeg");
 */    padding:0;
      opacity: 0.8;
+         min-height: 320px;
+
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius:4px;
@@ -188,7 +190,7 @@ i {
 
         text-align: left;
     background-image: url("/images/esaays.jpeg");
-
+  min-height: 120px;
 }
 .index-content .card p{
     margin:20px;
@@ -285,7 +287,17 @@ i {
 }
 
 
- 
+ .myclass-white { 
+  
+   display: block; 
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 6.9em;
+  line-height: 1.5em;
+     font-weight: 700;
+
+}
 
 
 #H1_1 {
