@@ -183,14 +183,25 @@ i {
     border-top-right-radius: 4px;
 }
 .index-content .card h4{
-         margin-top: 20px;
-    font-size:18px;
-    padding:20px 20px;
-     font-weight: 200; 
-
+         margin-top: 5px;
+     padding:20px 20px;
+ 
         text-align: left;
     background-image: url("/images/esaays.jpeg");
-  min-height: 120px;
+  min-height: 127px;
+  border-bottom: 2px solid #ff7518;
+   margin-bottom:15px;
+
+   display: block; 
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 5em;
+  line-height: 1.5em;
+     font-weight: 400;
+         font-size:22px;
+
+
 }
 .index-content .card p{
     margin:20px;
@@ -281,23 +292,16 @@ i {
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
-  max-height: 6.9em;
+  max-height: 7em;
   line-height: 1.5em;
- 
+      
+min-height: 7em;
+     font-weight: 100;
+
 }
 
 
- .myclass-white { 
-  
-   display: block; 
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-  overflow: hidden;
-  max-height: 6.9em;
-  line-height: 1.5em;
-     font-weight: 700;
-border-bottom: 2px solid #ff7518;
-}
+
 
 
 #H1_1 {
@@ -366,8 +370,17 @@ border-bottom: 2px solid #ff7518;
         word-wrap: break-word !important;
     }
 
- 
+ .index-content-relative {
+        position: relative; top: -30px;
+         }
 
+         @media only screen and (max-device-width: 480px) {
+ .index-content-relative {
+        position: relative; top: -80px;
+         }
+     }
+
+     
 
 
 

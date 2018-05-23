@@ -90,6 +90,17 @@ Template.HomePublicSection4AllEssaysHome.helpers({
 		//alert("essay_list.count()-------"+Essays.find().count());
 		  return Essays.find({"approval": "Approved" });
 	},
+	"formattedContent": function() {
+		//alert("essay_list.-------"+Essays);
+		//alert("essay_list.count()-------"+Essays.find().count());
+
+
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = this.Content;
+   var tmp1 = tmp.textContent || tmp.innerText || "";
+
+	return tmp1	  ;
+	},
 
 });
 

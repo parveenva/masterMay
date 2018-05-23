@@ -44,21 +44,21 @@ Our goal is to build the world’s largest open source repository of college ess
 
 <template name="HomePublicSection4AllEssaysHome">
 	<div class="col-md-12">
-		<h1 id="section4" style="position: relative; top: -30px;">
+		<h1 id="section4" style="position: relative; top: -30px;" align="center">
 			Recent Essays
 		</h1>
 	</div>
-	<div class="index-content" style="position: relative; top: -50px;">
+	<div class="index-content index-content-relative"  >
  			{{#each pendingEssayList}}
 			<a href="readblog">
 				<div class="col-lg-4">
 					<div class="card">
 						 
-						<h4 class="myclass-white">
+						<h4  >
 							{{title}}
 						</h4>
 						<p class="myclass">
-							{{{Content}}}
+							 {{formattedContent}}
 						</p>
 						<a align="right" href="readblog" class="readmore-button">
 							Read More..
