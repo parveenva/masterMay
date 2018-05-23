@@ -107,8 +107,7 @@ Template.HomePublicSection4AllEssaysHome.helpers({
 Template.HomePublicPublicFooter.events({
 
 	"click #footer-button": function(e, t) {
-   // formSubmitted.set(true);
-   // console.log("function eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeme ara hai");
+
 	// }, 
 
 	// 'submit #search-form' : function(e, t) {console.log("function me ara hai");
@@ -124,16 +123,21 @@ var register_email = t.find('#register_email').value.trim();
 		}
 
 
+		Meteor.call("peopleInsertEmail",  register_email , function(e, r) { if(e) errorAction(e);   });
+		
+
+ formSubmitted.set(true);
+
 }
 });
-  // formSubmitted = new ReactiveVar( false );
+  formSubmitted = new ReactiveVar( false );
   // errorMessage = new ReactiveVar( false );
 
 Template.HomePublicPublicFooter.helpers({
-// "formSubmitted": function() {
+"formSubmitted": function() {
 		 
-// 		  return formSubmitted.get();
-// 	},
+		  return formSubmitted.get();
+	},
 		errorMessage: function() {
 		return pageSession.get("errorMessage");
 	},

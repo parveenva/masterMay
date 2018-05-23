@@ -20,6 +20,11 @@ Meteor.methods({
 		
 		Essays.update({ "peopleID": id }, { $set:{"createdBy":data}  }, { multi: true });
 	},
+	"peopleInsertEmail": function(data) {
+	 
+
+		return People.insert({ "Email": data });
+	},
 
 	"essaysRemove": function(id) {
 		var doc = Essays.findOne({ _id: id });
@@ -29,4 +34,5 @@ Meteor.methods({
 
 		Essays.remove({ _id: id });
 	}
+
 });
