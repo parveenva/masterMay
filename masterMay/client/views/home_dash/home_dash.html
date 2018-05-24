@@ -294,38 +294,5 @@
     </div>
 </template>
 
-<template name="HomeDashHomeDashDvTable">
-    <table id="dataview-table" class="table table-striped">
-        <thead id="dataview-table-header">
-            <tr id="dataview-table-header-row">
-                <th class="th-sortable" data-sort="title">
-                    Title
-                </th>
-                <th class="th-sortable" data-sort="Content">
-                    Content
-                </th>
-                <th class="th-sortable" data-sort="document">
-                    document
-                </th>
-            </tr>
-        </thead>
-        <tbody id="dataview-table-items">
-            {{#each tableItems}} {{> HomeDashHomeDashDvTableItems}} {{/each}}
-        </tbody>
-    </table>
-</template>
 
-<template name="HomeDashHomeDashDvTableItems">
-    <tr id="dataview-table-items-row">
-        <td>
-            {{title}}
-        </td>
-        <td>
-            {{Content}}
-        </td>
-        <td>
-            {{document}}
-        </td>
-    </tr>
-</template>
 

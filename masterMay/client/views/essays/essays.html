@@ -56,10 +56,10 @@
 		<thead id="dataview-table-header">
 			<tr id="dataview-table-header-row">
 				<th class="th-sortable" data-sort="title">
-					Title
+					Essay Prompt
 				</th>
 				<th class="th-sortable"  data-sort="Content">
-					Content
+					Essay
 				</th>
 				<th class="th-sortable" data-sort="Content">
 					Status
@@ -78,13 +78,13 @@
 
 <template name="EssaysViewTableItems">
 	<tr id="dataview-table-items-row">
-		<td>
+		<td class="myclass">
 			{{title}}
 		</td>
 		<td>
 			
 			<p class="myclass">
-							{{{Content}}}
+							{{{formattedContent}}}
 						</p>
 		</td>
 		<td>

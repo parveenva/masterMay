@@ -371,7 +371,19 @@ Template.EssaysViewTableItems.helpers({
         return People.findOne({_id: this.peopleID});
 
     	}
-    }
+    },
+
+    "formattedContent": function() {
+		//alert("essay_list.-------"+Essays);
+		//alert("essay_list.count()-------"+Essays.find().count());
+
+
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = this.Content;
+   var tmp1 = tmp.textContent || tmp.innerText || "";
+
+	return tmp1	  ;
+	}
 	
     
 
