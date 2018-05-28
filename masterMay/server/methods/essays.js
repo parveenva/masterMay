@@ -21,9 +21,36 @@ Meteor.methods({
 		Essays.update({ "peopleID": id }, { $set:{"createdBy":data}  }, { multi: true });
 	},
 	"peopleInsertEmail": function(data) {
-	 
+	
+var existingEmail = People.findOne({ "Email": data });
+	 console.log("existingEmail"+existingEmail);
 
-		return People.insert({ "Email": data });
+if(existingEmail){
+		  
+
+	return false;
+}else{
+			  
+
+		var id = 	  People.insert({ "Email": data });
+//replaceSubstrings();
+	 console.log("id"+id);
+
+			 sendPeopleVerificationEmail(id,data) ;
+	return true;
+
+}
+	},
+"sendPeopleVerificationEmailMethod": function(id, data) {
+			console.log("sendPeopleVerificationEmailMethod");
+
+		sendPeopleVerificationEmail(id,data) ;
+	},
+
+"peopleUpdateByID": function(id, token) {
+			console.log("peopleUpdateByID");
+
+		People.update({ _id: id }, { $set:{"verificationToken":token,"verified":false}  });
 	},
 
 	"essaysRemove": function(id) {
@@ -33,6 +60,30 @@ Meteor.methods({
 		}
 
 		Essays.remove({ _id: id });
-	}
+	},
+
+
+
+ "verifyPeopleEmail": function (token) {
+        console.log("verifyPeopleEmail");
+
+      var people = People.findOne({
+        'verificationToken.token': token
+      }, {fields:{_id:1 }});
+     console.log(people);
+      People.update({
+        _id: people._id 
+      }, {
+        $set: {
+          'verified': true
+        },
+        $unset: {
+          'verificationToken': {
+             'token': token
+          }
+        }
+      });
+       
+}
 
 });

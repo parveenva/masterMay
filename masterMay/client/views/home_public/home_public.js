@@ -117,16 +117,28 @@ var register_email = t.find('#register_email').value.trim();
 		if(!isValidEmail(register_email))
 		{   console.log("2345647");
 
-			pageSession.set("errorMessage", "Please enter valid e-mail address.");
+			pageSession.set("errorMessage", "Please enter a valid e-mail address.");
 			t.find('#register_email').focus();
 			return false;
 		}
 
 
-		Meteor.call("peopleInsertEmail",  register_email , function(e, r) { if(e) errorAction(e);   });
-		
+	 Meteor.call("peopleInsertEmail",  register_email , function(e, r) { if(e) errorAction(e);   
+else{
+	 
+	if(!r){
+			 
 
- formSubmitted.set(true);
+		pageSession.set("errorMessage", "Email already exists.");
+			t.find('#register_email').focus();
+			return false;
+	}else{
+		  formSubmitted.set(true);
+
+	}
+}
+	});
+		
 
 }
 });

@@ -1,12 +1,16 @@
 var pageSession = new ReactiveDict();
 
+var passwordMandatory = true;
 Template.Register.onCreated(function() {
 	pageSession.set("errorMessage", "");
 	
 });
 
 Template.Register.onDestroyed(function() {
-	
+	if(pageSession.get("verificationEmailSent")){
+	Session.set("peopleFirstName", null);
+	Session.set("peopleLastName", null);
+}
 });
 
 Template.Register.onRendered(function() {
@@ -46,8 +50,15 @@ Template.Register.events({
 			t.find('#register_email').focus();
 			return false;
 		}
+//alert(passwordMandatory );
 
+if(!passwordMandatory){
+	if(register_password != ""){
+		passwordMandatory = true;
+	}
+}
 		// check password
+		if(passwordMandatory){
 		var min_password_len = 6;
 		if(!isValidPassword(register_password, min_password_len))
 		{
@@ -63,12 +74,15 @@ Template.Register.events({
 			t.find('#register_password_copy').focus();
 			return false;
 		}
-
+}
 		submit_button.button("loading");
 		var n = register_name.split(" ");
 		//alert("n---"+n);
 		//alert("n---"+n[0]);
 		//alert("n---"+n[1]);
+
+		if(passwordMandatory){
+//alert("creating user");
  		var userId = Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name }}, function(err) {
 			submit_button.button("reset");
 			if(err) {
@@ -81,24 +95,31 @@ Template.Register.events({
 			else
 			{
 				pageSession.set("errorMessage", "");
+
 				pageSession.set("verificationEmailSent", true);
-
-
-
-
-
-
-
-
-
-
-
 			}
 
 
 		});
 					//alert("userId" +userId);
+}else{
 
+	//alert("sending email to people");
+
+	 Meteor.call("sendPeopleVerificationEmailMethod", Session.get("peopleID"),register_email, function(err, res) {
+			if(err) {
+				alert(err.message);
+			}else{
+                              //alert("done");
+            
+            }
+        });
+
+pageSession.set("errorMessage", "");
+
+
+				pageSession.set("verificationEmailSent", true);
+}
 		return false;
 	},
 
@@ -127,7 +148,7 @@ Template.RegisterAfter.helpers({
 	},
 	
 	fullName: function() {
-		if(Session.get("peopleFirstName")){return Session.get("peopleFirstName")+" "+Session.get("peopleLastName");}
+		if(Session.get("peopleFirstName")){passwordMandatory = false; return Session.get("peopleFirstName")+" "+Session.get("peopleLastName");}
 		return "";
 	},
 	email: function() {

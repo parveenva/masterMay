@@ -17,14 +17,25 @@ this.VerifyEmailController = RouteController.extend({
 
 	isReady: function() {
 		
+		var token = this.params.token;
 
-		var acc = Accounts.verifyEmail(this.params.token, function () {
-	
-			
+		var acc = Accounts.verifyEmail(token, function () {
 
-			            Router.go('/verified');
 			
         });
+
+
+
+		if(!acc){
+			 Meteor.call("verifyPeopleEmail", token, function(err, res) {
+			if(err) {
+				//alert(err.message);
+			}else{
+                              //alert("done");
+            
+            }
+			});
+		} 
 
 		var subs = [
 		];

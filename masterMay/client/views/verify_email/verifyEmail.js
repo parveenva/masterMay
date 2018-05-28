@@ -12,14 +12,7 @@ Template.verifyEmail.onDestroyed(function() {
 	
 });
 
-
-
 Template.verifyEmail.onRendered(function() {
-		//alert("Meteor.userId()"+Meteor.userId());
-
-});
-
-Template.verified.onDestroyed(function() {
 		//alert("verified--"+Meteor.userId());
 
 		var userID =  Meteor.userId();
