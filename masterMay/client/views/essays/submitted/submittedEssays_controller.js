@@ -1,5 +1,5 @@
-this.DashboardPageController = RouteController.extend({
-	template: "DashboardPage",
+this.submittedEssays_controller = RouteController.extend({
+	template: "submittedEssays",
 	
 
 	yieldTemplates: {
@@ -19,14 +19,13 @@ this.DashboardPageController = RouteController.extend({
 		
 
 		var subs = [
-			Meteor.subscribe("college_list")
+			Meteor.subscribe("essay", this.params.essayId)
 		];
 		var ready = true;
 		_.each(subs, function(sub) {
 			if(!sub.ready())
 				ready = false;
 		});
-		
 		return ready;
 	},
 
@@ -35,7 +34,7 @@ this.DashboardPageController = RouteController.extend({
 
 		var data = {
 			params: this.params || {},
-			college_list: UsersCollegeInfo.find({}, {})
+			essay: Essays.findOne({_id:this.params.essayId}, {})
 		};
 		
 

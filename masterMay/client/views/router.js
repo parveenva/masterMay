@@ -58,6 +58,7 @@ Router.freeRoutes = [
 	"readblog",
 	"more_essay",
 		"essays.insert",
+		"submittedEssays",
 "aboutUs"
 ];
 
@@ -155,6 +156,8 @@ else {
 	this.route("/colleges/update/:collegeId", {name: "colleges.update", title: "", controller: "CollegesUpdateController"});
 	this.route("/dashboard_page", {name: "dashboard_page", title: "", controller: "DashboardPageController"});
 	this.route("/home_dash", {name: "home_dash", title: "", controller: "HomeDashController"});
+	this.route("/submittedEssays", {name: "submittedEssays", title: "", controller: "submittedEssays_controller"});
+
       this.route('addmore', {
         path: '/addmore',
         template: 'addmore'

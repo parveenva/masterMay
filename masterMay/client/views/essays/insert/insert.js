@@ -24,6 +24,14 @@ Template.EssaysInsert.events({
 });
 
 Template.EssaysInsert.helpers({
+
+	"peopleIDfromSession": function() {
+  if(Session.get("peopleID")!=null) {
+	  return true;
+		}
+		return false;
+
+	}
 	
 });
 

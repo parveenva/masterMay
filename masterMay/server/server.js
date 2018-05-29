@@ -440,7 +440,7 @@ Accounts.validateLoginAttempt(function(info) {
 	}
 
   if(verifyEmail && info.user && info.user.emails && info.user.emails.length && !info.user.emails[0].verified ) {
-			throw new Meteor.Error(  "Please click on the link in the verification email we have sent you to sign-in.");
+			throw new Meteor.Error(  499,"Please click on the link in the verification email we have sent you to sign-in.");
   }
 
 	return true;

@@ -1,0 +1,49 @@
+<template name="submittedEssays">
+
+    {{> essaysTop}}
+    <div class="page-container container" id="content">
+        <div class="row" id="title_row">
+          <div class="col-md-12">
+          </div>
+        </div>
+
+	<div id="essays-view" class="col-md-12">
+		<h2 id="component-title">
+			You have subbmited below Essays :
+		</h2>
+    <div class="index-content index-content-relative"  >
+      {{#each peopleEssayList}}
+        <div class="col-lg-4">
+         <div class="card">
+            <div align="right" style="color:red">Status : {{approval}}&nbsp;</div>
+
+           <h4  >
+             {{title}}
+           </h4>
+           <p class="myclass">
+              {{formattedContent}}
+           </p>
+          
+         </div>
+       </div>
+      {{/each}}
+  </div>		
+  </div>
+  <div class="col-md-12"    >
+      <p>
+              <div class="submit-div">
+                <a href="javascript:history.back()" id="form-close-button" class="btn btn-primary">
+                  OK
+                </a>
+                 
+                
+             
+      
+                
+                  
+              </div>
+              </p>
+                </div>
+</div>
+ 
+</template>

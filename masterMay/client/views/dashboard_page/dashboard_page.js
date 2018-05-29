@@ -5,10 +5,18 @@ import { Tracker } from 'meteor/tracker';
  SimpleSchema.extendOptions(['autoform']);
 
 
+
 Schemas = {};
   Session.set("essaysTopMsg", "Submit your college essays and get a free $50 gift card." );
 
 Template.DashboardPage.onRendered(function() {
+
+  if(Session.get("peopleID")!=null) {
+		
+    Router.go( "addmore");
+
+  }
+
   Session.set("essaysTopMsg", "Submit your college essays and get a free $50 gift card." );
 
 
@@ -212,10 +220,6 @@ Template.DashboardPage.events({
  
 });
 
- 
-Template.DashboardPage.helpers({
-         
-    });
 
 
 Template.essaysTop.helpers({
@@ -229,3 +233,18 @@ Template.essaysTop.helpers({
 Template.addmore.onRendered(function() {
  Session.set("essaysTopMsg", "Thank you for the submission." );
 });
+
+
+Template.addmore.helpers({
+
+  "peopleEssayCount": function() {
+
+    var peopleEssay = Essays.find({"peopleID": Session.get("peopleID") });
+    if(peopleEssay!=null) {
+      return peopleEssay.count();
+      }
+      return 0;
+  
+    } 
+});
+
