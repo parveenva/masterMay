@@ -27,7 +27,8 @@ Template.verified.onRendered(function() {
 
 
 	if(userID!=null){
-	Router.go("home_dash");		
+   Session.set("fromVerifyEmail", "true" );
+Router.go("home_dash");		
 	}else{
 	
 		var 	token= 	Session.get("emailToken");
@@ -37,9 +38,15 @@ Template.verified.onRendered(function() {
 				if(err) {
 					//alert(err.message);
 				}else{
+
+					var essayCount = Essays.find({"peopleID": res });
+ 					if(essayCount!=null ){
 								   Session.set("peopleID", res);
+								     Session.set("essaysTopMsg", "Thank you for verifying your email address!" );
+								     Session.set("fromVerifyEmail", "true" );
+
 								   Router.go("submittedEssays");		
-				
+				}
 				}
 				});
 		

@@ -6,10 +6,10 @@
           <div class="col-md-12">
           </div>
         </div>
-
+{{#if peopleEssayCount}} 
 	<div id="essays-view" class="col-md-12">
 		<h2 id="component-title">
-			You have subbmited below Essays :
+			You have submitted below Essays :
 		</h2>
     <div class="index-content index-content-relative"  >
       {{#each peopleEssayList}}
@@ -29,6 +29,9 @@
       {{/each}}
   </div>		
   </div>
+      {{/if}}
+
+
   <div class="col-md-12"    >
       <p>
               <div class="submit-div">

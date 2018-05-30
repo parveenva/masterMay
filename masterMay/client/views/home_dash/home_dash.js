@@ -5,7 +5,8 @@ Template.HomeDash.onCreated(function() {
 });
 
 Template.HomeDash.onDestroyed(function() {
-	
+			  Session.set("fromVerifyEmail",null);
+
 });
 
 Template.HomeDash.onRendered(function() {
@@ -38,6 +39,15 @@ Template.HomeDash.helpers({
 		  return isAdmin;
 	},
 
+	  "fromVerifyEmail": function() {
+  
+   var fromVerifyEmail = Session.get("fromVerifyEmail");
+ 		if(fromVerifyEmail !=null  ){
+
+		  return true;
+		} else{return false;}
+	  }
+		   
 	
 	
 });
