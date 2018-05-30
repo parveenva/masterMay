@@ -238,11 +238,12 @@ Template.addmore.onRendered(function() {
 Template.addmore.helpers({
 
   "peopleEssayCount": function() {
-
+if(Session.get("peopleID")!=null){
     var peopleEssay = Essays.find({"peopleID": Session.get("peopleID") });
     if(peopleEssay!=null) {
       return peopleEssay.count();
       }
+    }
       return 0;
   
     } 

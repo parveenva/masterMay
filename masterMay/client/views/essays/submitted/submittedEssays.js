@@ -23,13 +23,20 @@ Template.submittedEssays.helpers({
   
    var fromVerifyEmail = Session.get("fromVerifyEmail");
  		if(fromVerifyEmail !=null  ){
-		  return "/home_public";
+		  return "/";
 		} else{return "javascript:history.back()";}
 	  }
 		   
 	  });
   
+ Template.submittedEssays.onCreated(function() {
+			  Blaze._allowJavascriptUrls();
+
+}); 
+ Template.submittedEssays.onDestroyed(function() {
+			  Session.set("fromVerifyEmail",null);
+
+});
+  
   
  
-  
-  
