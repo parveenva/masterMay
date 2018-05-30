@@ -174,6 +174,11 @@ else {
         template: 'verified'
     });
 
+    this.route('verifyemail', {
+        path: '/verifyemail',
+        template: 'verifyemail'
+	});
+	
     Router.route('/AddStudentData', {
   name: 'AddStudentData'
 });

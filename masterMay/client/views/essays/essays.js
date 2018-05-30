@@ -65,10 +65,8 @@ var EssaysViewItems = function(cursor) {
 //owner
 
 
-alert("1");
 
    if(Meteor.user().roles.indexOf("admin") == -1){
-	alert("2");		
 	regEx = new RegExp(Meteor.userId(), "i");
 		  searchFields = ["createdBy"];
 		filtered = _.filter(filtered, function(item) {

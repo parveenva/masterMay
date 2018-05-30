@@ -83,7 +83,8 @@ if(existingEmail){
           }
         }
       });
-       
+			 
+			return people._id ;
 }
 
 });
