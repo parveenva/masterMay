@@ -31,7 +31,7 @@
 			{{/if}}
 			<div class="form-group  field-title">
 				<label for="title">
-					Title
+				 Essay Prompt
 				</label>
 				<div class="input-div">
 					<p class="form-control-static  control-field-title">
@@ -41,7 +41,17 @@
 			</div>
 			<div class="form-group  field-content">
 				<label for="Content">
-					Content
+					Common App or School Specific
+				</label>
+				<div class="input-div">
+					<p class="form-control-static  control-field-content">
+						{{commonORschool essay.essayCategory}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-content">
+				<label for="Content">
+					Essay
 				</label>
 				<div class="input-div">
 					<p class="form-control-static  control-field-content">
@@ -49,6 +59,7 @@
 					</p>
 				</div>
 			</div>
+		
 				<div class="form-group  field-content">
 				<label for="Content">
 					Status
@@ -66,10 +77,15 @@
 						OK
 					</a>
 					 {{#if isAdmin}}  
+					 {{#unless equals essay.approval "Approved"}}  
+
+					  
+
 		 		 <button id="form-submit-button" class="btn btn-success" type="submit">
 						Approve
 					</button>
-					
+					{{/unless}}
+
 			{{/if}}
 
 					

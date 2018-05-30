@@ -1,5 +1,21 @@
 var pageSession = new ReactiveDict();
 
+Template.registerHelper('equals', function(param1, param2) {
+	return param1 === param2;
+  });
+
+  
+  Template.registerHelper('commonORschool', function(param1) {
+	if(param1 === "common"){
+ return "Common Essay"
+	}else{
+
+		return "School specific Essay"
+	}
+  });
+  
+  
+
 Template.EssaysDetails.onCreated(function() {
 	
 });
@@ -157,7 +173,8 @@ return true;
 		if (Meteor.user().roles.indexOf("admin") != -1)  {
 
 		isAdmin = true;
-		}
+		
+	}
 
 		  return isAdmin;
 	},

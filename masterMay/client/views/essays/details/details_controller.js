@@ -34,7 +34,7 @@ this.EssaysDetailsController = RouteController.extend({
 
 		var data = {
 			params: this.params || {},
-			essay: Essays.findOne({_id:this.params.essayId}, {})
+			essay: Essays.findOne({_id:this.params.essayId}, {}),
 		};
 		
 

@@ -40,7 +40,7 @@ Router.go("home_dash");
 				}else{
 
 					var essayCount = Essays.find({"peopleID": res });
- 					if(essayCount!=null ){
+ 					if(essayCount!=null && essayCount.count()>0){
 								   Session.set("peopleID", res);
 								     Session.set("essaysTopMsg", "Thank you for verifying your email address!" );
 								     Session.set("fromVerifyEmail", "true" );
