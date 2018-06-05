@@ -62,6 +62,11 @@ if(existingEmail){
 		Essays.remove({ _id: id });
 	},
 
+"peopleRemove": function(id) {
+		
+		People.remove({ _id: id });
+	},
+
 
 
  "verifyPeopleEmail": function (token) {

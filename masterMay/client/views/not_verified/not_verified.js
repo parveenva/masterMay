@@ -335,6 +335,7 @@ Template.NotVerifiedViewTableItems.helpers({
 	},
 
 	"deleteButtonClass": function() {
+		 
 		return People.userCanRemove(Meteor.userId(), this) ? "" : "hidden";
 			}
 		// ,
