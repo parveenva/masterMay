@@ -1,3 +1,11 @@
+import { publishPagination } from 'meteor/kurounin:pagination';
+
+ 
+
+publishPagination(Essays/*, {
+    filters: {is_published: true}
+}*/);
+
 Meteor.publish("essay_list", function() {
 	return Essays.find({}, {});
 });

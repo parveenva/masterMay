@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating';
+
 var pageSession = new ReactiveDict();
 
 Meteor.subscribe("allUsers");
@@ -5,6 +7,8 @@ Meteor.subscribe("people_list");
 
 
 Template.Essays.onCreated(function() {
+
+	  
 	
 });
 
@@ -111,6 +115,28 @@ var EssaysViewExport = function(cursor, fileType) {
 }
 
 Template.EssaysView.onCreated(function() {
+
+var userIdFilter = {};
+	   if(Meteor.user().roles.indexOf("admin") == -1){
+ 
+	   		userIdFilter = {		createdBy : Meteor.userId()     };
+
+	   };
+
+	this.pagination = new Meteor.Pagination(Essays, {
+		filters:  
+			userIdFilter
+           // $text: {$search: 'document'}
+         
+        ,
+        sort: {
+            modifiedAt: -1
+        }
+
+     });
+
+
+
 	
 });
 
@@ -200,6 +226,20 @@ Template.EssaysView.events({
 	"click #dataview-export-json": function(e, t) {
 		e.preventDefault();
 		EssaysViewExport(this.essay_list, "json");
+	},
+
+	"click .th-sortable": function(e, t) {
+		e.preventDefault();
+		var oldSortBy = pageSession.get("EssaysViewSortBy");
+		var newSortBy = $(e.target).attr("data-sort");
+
+		pageSession.set("EssaysViewSortBy", newSortBy);
+		if(oldSortBy == newSortBy) {
+			var sortAscending = pageSession.get("EssaysViewSortAscending") || false;
+			pageSession.set("EssaysViewSortAscending", !sortAscending);
+		} else {
+			pageSession.set("EssaysViewSortAscending", true);
+		}
 	}
 
 	
@@ -234,45 +274,31 @@ Template.EssaysView.helpers({
 	},
 	"viewAsGallery": function() {
 		return pageSession.get("EssaysViewStyle") == "gallery";
-	}
+	},
 
-	
-});
-
-
-Template.EssaysViewTable.onCreated(function() {
-	
-});
-
-Template.EssaysViewTable.onDestroyed(function() {
-	
-});
-
-Template.EssaysViewTable.onRendered(function() {
-	
-});
-
-Template.EssaysViewTable.events({
-	"click .th-sortable": function(e, t) {
-		e.preventDefault();
-		var oldSortBy = pageSession.get("EssaysViewSortBy");
-		var newSortBy = $(e.target).attr("data-sort");
-
-		pageSession.set("EssaysViewSortBy", newSortBy);
-		if(oldSortBy == newSortBy) {
-			var sortAscending = pageSession.get("EssaysViewSortAscending") || false;
-			pageSession.set("EssaysViewSortAscending", !sortAscending);
-		} else {
-			pageSession.set("EssaysViewSortAscending", true);
-		}
-	}
-});
-
-Template.EssaysViewTable.helpers({
+	isReady: function () {
+        return Template.instance().pagination.ready();
+    },
+    templatePagination: function () {
+        return Template.instance().pagination;
+    },
+    
+    // optional helper used to return a callback that should be executed before changing the page
+    clickEvent: function() {
+        return function(e, templateInstance, clickedPage) {
+            e.preventDefault();
+            console.log('Changing page from ', templateInstance.data.pagination.currentPage(), ' to ', clickedPage);
+        };
+    },
 	"tableItems": function() {
-		return EssaysViewItems(this.essay_list);
+        return Template.instance().pagination.getPage();
 	}
+
+	
 });
+
+
+
 
 
 Template.EssaysViewTableItems.onCreated(function() {

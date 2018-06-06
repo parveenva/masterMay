@@ -30,9 +30,22 @@
 							</span>
 						</button>
 					</span>
+
+					 
 				</div>
-			</div>
+  						
+ 				 	<div id="dataview-controls-search-group" class="input-group">
+					&nbsp;
+
+					 
+				</div>
+		
+
+					</div>
+
 		</form>
+
+		
 		{{#if isNotEmpty}}
 			{{#if isNotFound}}
 		<div class="alert alert-warning">
@@ -40,20 +53,16 @@
 		</div>
 		{{else}}
 		<div id="dataview-data">
-			{{#if viewAsTable}} {{> EssaysViewTable}} {{/if}}
-		</div>
-		{{/if}}
-		{{else}}
-		<div class="alert alert-info">
-			Empty.
-		</div>
-		{{/if}}
-	</div>
-</template>
+			{{#if viewAsTable}} 
 
-<template name="EssaysViewTable">
-	<table id="dataview-table" class="table table-striped table-hover">
+<!-- EssaysViewTable start
+ -->
+
+
+<table id="dataview-table" class="table table-striped table-hover">
+		
 		<thead id="dataview-table-header">
+		
 			<tr id="dataview-table-header-row">
 				<th class="th-sortable" data-sort="title">
 					Essay Prompt
@@ -68,13 +77,48 @@
 				<th>
 					Submitted by
 				</th>
+				<th>
+							 
+				</th>
+				
+
 			</tr>
 		</thead>
 		<tbody id="dataview-table-items">
-			{{#each tableItems}} {{> EssaysViewTableItems}} {{/each}}
+			  {{#if isReady}}
+
+ 			{{#each tableItems}} {{> EssaysViewTableItems}} {{/each}}
+
+			
+
+			 {{else}}
+            Loading...
+        {{/if}}
+
 		</tbody>
 	</table>
+
+{{> defaultBootstrapPaginator pagination=templatePagination limit=4  containerClass="input-group alright" onClick=clickEvent}}
+	<!-- EssaysViewTable end
+ -->
+
+
+			 {{/if}}
+		</div>
+		{{/if}}
+		{{else}}
+		<div class="alert alert-info">
+			Empty.
+		</div>
+		{{/if}}
+	</div>
 </template>
+
+
+
+ 
+
+
 
 <template name="EssaysViewTableItems">
 	<tr id="dataview-table-items-row">
