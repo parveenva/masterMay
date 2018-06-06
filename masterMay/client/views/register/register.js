@@ -16,6 +16,7 @@ Template.Register.onDestroyed(function() {
 Template.Register.onRendered(function() {
 	pageSession.set("errorMessage", "");
 	pageSession.set("verificationEmailSent", false);
+ 
 
 	
 	Meteor.defer(function() {
@@ -88,6 +89,8 @@ if(!passwordMandatory){
 			if(err) {
 				if(err.error === 499) {
 					pageSession.set("verificationEmailSent", true);
+									Session.set("verificationEmailSentSession", true);
+
 				} else {
 					pageSession.set("errorMessage", err.message);
 				}
@@ -97,6 +100,8 @@ if(!passwordMandatory){
 				pageSession.set("errorMessage", "");
 
 				pageSession.set("verificationEmailSent", true);
+								Session.set("verificationEmailSentSession", true);
+
 			}
 
 
@@ -119,6 +124,8 @@ pageSession.set("errorMessage", "");
 
 
 				pageSession.set("verificationEmailSent", true);
+				Session.set("verificationEmailSentSession", true);
+
 }
 		return false;
 	},

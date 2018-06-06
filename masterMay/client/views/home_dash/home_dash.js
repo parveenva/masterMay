@@ -10,6 +10,40 @@ Template.HomeDash.onDestroyed(function() {
 });
 
 Template.HomeDash.onRendered(function() {
+
+
+	var userID =  Meteor.userId();
+
+
+	if(userID!=null){
+		//	alert("userid-------"+userID);
+	
+		var email = Meteor.user().emails[0].address;
+				//alert("email---"+email);
+	
+				var  peopleID1 = People.findOne({"Email":email},{ fields: { "_id": 1 }});
+	
+				//alert("peopleID-------"+peopleID);
+	
+	 
+	if(peopleID1!=null){
+	
+		//alert("peopleID-------"+peopleID._id);
+	
+				// alert("peopleID---"+peopleID._id);
+	Meteor.call("essaysUpdateManyBP", peopleID1._id, userID, function(err, res) {
+				if(err) {
+					alert(err.message);
+				}else{
+								  //alert("done");
+				
+				}
+			});
+	
+		}
+				  
+//	Router.go("home_dash");		
+	}
 	
 	Meteor.defer(function() {
 		globalOnRendered();

@@ -159,8 +159,10 @@
 
  		<div> 
 		<a href="/essays/insert" class="btn btn-primary"> Submit another Essay.
-		</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="register" class="btn btn-primary"> Done.
-		</a>
+		</a>&nbsp;&nbsp;&nbsp;&nbsp;{{#if peopleExists}}  {{else}}
+<a href="register" class="btn btn-primary"> Done.
+		</a>  {{/if}}
+
 		</div>
 
 		 

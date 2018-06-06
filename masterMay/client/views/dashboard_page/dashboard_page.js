@@ -230,6 +230,11 @@ Template.essaysTop.helpers({
         } 
     });
 
+ Template.addmore.onCreated(function() {
+        Blaze._allowJavascriptUrls();
+
+}); 
+
 Template.addmore.onRendered(function() {
  Session.set("essaysTopMsg", "Thank you for the submission." );
 });
@@ -245,6 +250,17 @@ if(Session.get("peopleID")!=null){
       }
     }
       return 0;
+  
+    } ,
+
+    "peopleExists": function() {
+ if(Session.get("verificationEmailSentSession")!=null && Session.get("verificationEmailSentSession")){
+       
+ 
+      return true;
+       
+    }
+      return false;
   
     } 
 });

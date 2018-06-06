@@ -28,6 +28,7 @@ Template.verified.onRendered(function() {
 
 	if(userID!=null){
    Session.set("fromVerifyEmail", "true" );
+
 Router.go("home_dash");		
 	}else{
 	
@@ -44,6 +45,7 @@ Router.go("home_dash");
 								   Session.set("peopleID", res);
 								     Session.set("essaysTopMsg", "Thank you for verifying your email address!" );
 								     Session.set("fromVerifyEmail", "true" );
+									Session.set("verificationEmailSentSession", true);
 
 								   Router.go("submittedEssays");		
 				}
