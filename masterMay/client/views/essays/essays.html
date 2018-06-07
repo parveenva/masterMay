@@ -21,6 +21,7 @@
 					Add new
 				</button>
 			</div>
+
 			<div id="dataview-controls-search">
 				<div id="dataview-controls-search-group" class="input-group">
 					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
@@ -30,22 +31,10 @@
 							</span>
 						</button>
 					</span>
-
-					 
 				</div>
-  						
- 				 	<div id="dataview-controls-search-group" class="input-group">
-					&nbsp;
-
-					 
-				</div>
-		
-
-					</div>
-
+			</div>
 		</form>
-
-		
+					
 		{{#if isNotEmpty}}
 			{{#if isNotFound}}
 		<div class="alert alert-warning">
@@ -70,11 +59,11 @@
 				<th class="th-sortable"  data-sort="Content">
 					Essay
 				</th>
-				<th class="th-sortable" data-sort="Content">
+				<th class="th-sortable" data-sort="approval">
 					Status
 				</th>
 				
-				<th>
+				<th >
 					Submitted by
 				</th>
 				<th>

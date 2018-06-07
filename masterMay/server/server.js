@@ -232,6 +232,12 @@ Accounts.emailTemplates.verifyEmail.html = function(user, url) {
 };
 
 Meteor.startup(function() {
+
+	Essays._ensureIndex({
+    "title": "text",
+    "Content": "text"
+  });
+	
 	// read environment variables from Meteor.settings
 	if(Meteor.settings && Meteor.settings.env && _.isObject(Meteor.settings.env)) {
 		for(var variableName in Meteor.settings.env) {

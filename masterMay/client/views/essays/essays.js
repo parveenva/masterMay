@@ -125,9 +125,10 @@ var userIdFilter = {};
 
 	this.pagination = new Meteor.Pagination(Essays, {
 		filters:  
-			userIdFilter
+			 userIdFilter
+			// { $text: {$search: 'a'} }
            // $text: {$search: 'document'}
-         
+        // {title: '22' }
         ,
         sort: {
             modifiedAt: -1
@@ -136,8 +137,7 @@ var userIdFilter = {};
      });
 
 
-
-	
+ 	
 });
 
 Template.EssaysView.onDestroyed(function() {
@@ -146,6 +146,7 @@ Template.EssaysView.onDestroyed(function() {
 
 Template.EssaysView.onRendered(function() {
 	pageSession.set("EssaysViewStyle", "table");
+ 
 	
 });
 
@@ -158,11 +159,46 @@ Template.EssaysView.events({
 		e.preventDefault();
 		var form = $(e.currentTarget).parent();
 		if(form) {
-			var searchInput = form.find("#dataview-search-input");
+			var searchInput = document.getElementById("dataview-search-input");
+
 			if(searchInput) {
-				searchInput.focus();
-				var searchString = searchInput.val();
+ 				searchInput.focus();
+				var searchString = searchInput.value;
+
+
+
 				pageSession.set("EssaysViewSearchString", searchString);
+
+				var filter = {};
+//alert("searchString>>>>"+searchString);
+
+   if(Meteor.user().roles.indexOf("admin") == -1){
+ 
+	   		if(searchString.replace(/\s/g,"") == ""){
+	   			//alert("blank>>>>");
+
+				filter = {		createdBy : Meteor.userId()     };
+	   		}else{
+	   			filter = {		createdBy : Meteor.userId() ,              $text: {$search: searchString}};
+	   		}
+  
+
+	   }else{
+	   		if(searchString.replace(/\s/g,"") == ""){
+	   				   			//alert("blank>>>>");
+
+				filter = {};
+	   		}else{
+	   				   			//alert("not blank>>>>");
+
+	   		filter = {		  $text: {$search: searchString}};
+	   		}
+
+	   };
+	   				   			//alert(filter);
+
+	 	Template.instance().pagination.filters(filter);
+
 			}
 
 		}
@@ -173,16 +209,52 @@ Template.EssaysView.events({
 		if(e.which === 13)
 		{
 			e.preventDefault();
-			var form = $(e.currentTarget).parent();
-			if(form) {
-				var searchInput = form.find("#dataview-search-input");
-				if(searchInput) {
-					var searchString = searchInput.val();
-					pageSession.set("EssaysViewSearchString", searchString);
-				}
+		var form = $(e.currentTarget).parent();
+		if(form) {
+			var searchInput = document.getElementById("dataview-search-input");
+
+			if(searchInput) {
+ 				searchInput.focus();
+				var searchString = searchInput.value;
+
+
+
+				pageSession.set("EssaysViewSearchString", searchString);
+
+				var filter = {};
+//alert("searchString>>>>"+searchString);
+
+   if(Meteor.user().roles.indexOf("admin") == -1){
+ 
+	   		if(searchString.replace(/\s/g,"") == ""){
+	   			//alert("blank>>>>");
+
+				filter = {		createdBy : Meteor.userId()     };
+	   		}else{
+	   			filter = {		createdBy : Meteor.userId() ,              $text: {$search: searchString}};
+	   		}
+  
+
+	   }else{
+	   		if(searchString.replace(/\s/g,"") == ""){
+	   				   			//alert("blank>>>>");
+
+				filter = {};
+	   		}else{
+	   				   			//alert("not blank>>>>");
+
+	   		filter = {		  $text: {$search: searchString}};
+	   		}
+
+	   };
+	   				   			//alert(filter);
+
+	 	Template.instance().pagination.filters(filter);
 
 			}
-			return false;
+
+		}
+		return false;
 		}
 
 		if(e.which === 27)
@@ -229,17 +301,25 @@ Template.EssaysView.events({
 	},
 
 	"click .th-sortable": function(e, t) {
+ 
+ 
 		e.preventDefault();
 		var oldSortBy = pageSession.get("EssaysViewSortBy");
 		var newSortBy = $(e.target).attr("data-sort");
-
+var aORd = 1;
 		pageSession.set("EssaysViewSortBy", newSortBy);
 		if(oldSortBy == newSortBy) {
 			var sortAscending = pageSession.get("EssaysViewSortAscending") || false;
 			pageSession.set("EssaysViewSortAscending", !sortAscending);
+			if(sortAscending){ aORd = -1;}else{aORd = 1; }
 		} else {
+
 			pageSession.set("EssaysViewSortAscending", true);
 		}
+ 
+
+					Template.instance().pagination.sort({newSortBy: aORd});
+
 	}
 
 	
@@ -258,7 +338,10 @@ Template.EssaysView.helpers({
 		return this.essay_list && this.essay_list.count() > 0;
 	},
 	"isNotFound": function() {
-		return this.essay_list && pageSession.get("EssaysViewSearchString") && EssaysViewItems(this.essay_list).length == 0;
+
+		return Template.instance().pagination.totalItems()==0;
+
+		//return this.essay_list && pageSession.get("EssaysViewSearchString") && EssaysViewItems(this.essay_list).length == 0;
 	},
 	"searchString": function() {
 		return pageSession.get("EssaysViewSearchString");
