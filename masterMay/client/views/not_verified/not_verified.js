@@ -352,7 +352,17 @@ createdByUserDetails: function () {
         return People.findOne({_id: this.peopleID});
 
     	}
+    },
+     "peopleEssayCount": function() {console.log(this._id);
+if(this._id!=null){
+    var peopleEssay = Essays.find({"peopleID": this._id });
+    if(peopleEssay!=null) {
+      return peopleEssay.count();
+      }
     }
+      return 0;
+  
+    } 
 
 });
 

@@ -331,5 +331,16 @@ Template.AdminUsersViewTableItems.helpers({
 
 	"deleteButtonClass": function() {
 		return Users.isAdmin(Meteor.userId()) ? "" : "hidden";
-	}
+	},
+
+	 "peopleEssayCount": function() {console.log(this._id);
+if(this._id!=null){
+    var peopleEssay = Essays.find({"createdBy": this._id });
+    if(peopleEssay!=null) {
+      return peopleEssay.count();
+      }
+    }
+      return 0;
+  
+    } 
 });
